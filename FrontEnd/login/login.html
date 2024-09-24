@@ -11,8 +11,8 @@
       rel="stylesheet"
     />
     <meta name="description" content="" />
-    <link rel="stylesheet" href="./assets/style.css" />
-    <link rel="stylesheet" href="./assets/login.css" />
+    <link rel="stylesheet" href="../assets/style.css" />
+    <link rel="stylesheet" href="./login.css" />
     <script type="module" src="" defer></script>
   </head>
   <body>
@@ -21,17 +21,21 @@
       <nav>
         <ul>
           <li></li>
-          <li><a href="index.html">projets</a></li>
+          <li><a href="../index.html">projets</a></li>
           <li>contact</li>
-          <li><a href="login.html">login</a></li>
-          <li><img src="./assets/icons/instagram.png" alt="Instagram" /></li>
+          <li>
+            <a href="./login.html" style="font-weight: bold; color: black"
+              >login</a
+            >
+          </li>
+          <li><img src="../assets/icons/instagram.png" alt="Instagram" /></li>
         </ul>
       </nav>
     </header>
     <main>
       <form class="login-form">
         <h2>Login</h2>
-        <label for="mail" id="e-mail">e-mail</label>
+        <label for="mail" id="e-mail">E-mail</label>
         <input type="email" />
         <label for="pwd" id="pwd">Mot de passe</label>
         <input type="password" />
@@ -41,7 +45,11 @@
       </form>
     </main>
     <footer>
-      <p>Mentions légales</p>
+      <footer>
+        <a href="" target="_blank" class="footer-content"
+          ><p class="footer-txt">Mentions légales</p>
+        </a>
+      </footer>
     </footer>
     <script src=""></script>
   </body>

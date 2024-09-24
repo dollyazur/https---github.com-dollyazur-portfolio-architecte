@@ -90,6 +90,7 @@ video {
   font-size: 100%;
   font: inherit;
   vertical-align: baseline;
+  text-decoration: none;
 }
 /* HTML5 display-role reset for older browsers */
 article,
@@ -133,6 +134,7 @@ body {
   margin: auto;
   font-family: "Work Sans";
   font-size: 14px;
+  background-color: #fffef8;
 }
 header {
   display: flex;
@@ -175,7 +177,6 @@ button {
   left: 427px;
   gap: 0px;
   border-radius: 60px;
-  opacity: 0px;
   border: 1px solid #1d6154;
 }
 nav ul {
@@ -275,4 +276,7 @@ footer nav ul {
   display: flex;
   justify-content: flex-end;
   margin: 2em;
+}
+li img {
+  width: 70%;
 }
