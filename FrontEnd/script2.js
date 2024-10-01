@@ -12,7 +12,6 @@ console.log(recupProjet()); //on affiche notre fonction, et on appelle la foncti
 function afficherProjet(projets) {
   const gallery = document.querySelector(".gallery"); //on recup la gallery dans le DOM
   gallery.innerHTML = ""; //effacement total des element sus mentionnés
-  // la gallery est toujours là, pourquoi?
 
   // On parcourt tous les projets récupérés
   projets.forEach((projet) => {
@@ -40,8 +39,10 @@ function afficherProjet(projets) {
 // Fonction pour récupérer les catégories de l'API (si disponible) ou depuis des données locales
 async function recupCategories() {
   try {
+    //a voir si je le garde
     const response = await fetch("http://localhost:5678/api/categories"); // Requête API pour les catégories
     const categories = await response.json(); // On convertit la réponse en JSON
+    console.log(categories); //fournit dans le JSON de base
     return categories; // On retourne les catégories récupérées
   } catch (error) {
     console.error("Erreur lors de la récupération des catégories : ", error);
@@ -66,7 +67,7 @@ function genererMenuCategories(categories, projets) {
     bouton.textContent = categorie.name; // Nom de la catégorie
     bouton.addEventListener("click", () => {
       const projetsFiltres = projets.filter(
-        (projet) => projet.categoryId === categorie.id
+        (projet) => projet.categoryId === categorie.id // on filtre par l'id de la categorie comme affiché dans le console.log
       ); // Filtrer les projets par catégorie
       afficherProjet(projetsFiltres); // Afficher les projets filtrés
     });
@@ -75,6 +76,7 @@ function genererMenuCategories(categories, projets) {
 }
 
 // Appel des fonctions pour récupérer les projets et les catégories, puis les afficher et générer le menu
+// d'abord on crée les fonctions et ensuite on les appelle
 async function init() {
   const projets = await recupProjet(); // On récupère les projets
   const categories = await recupCategories(); // On récupère les catégories
