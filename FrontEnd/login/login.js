@@ -1,3 +1,27 @@
+//on la met en premier, parce que c'est le click du bouton que ca va l'appeler donc faut qu'elle soit deja en place
+async function login(emailValue, motDePasseValue) {
+  fetch("http://localhost:5678/api/users/login", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json", //comment je veux avoir les données, ici en json
+    },
+    body: JSON.stringify({
+      //les données que j'envoie c'est des chaines de char, on va les transformer en json pour qu l'API comprenne
+      email: emailValue,
+      password: motDePasseValue,
+    }),
+  })
+    .then((response) => {
+      // Traiter la réponse
+      const data = response.json(); //On traduit la réponse en json, sinon on ne peut pas lire nous humains
+      console.log(data.token);
+    })
+    .catch((error) => {
+      // Gérer les erreurs c'est juste pour moi, l'user ne le voit pas
+      console.log("La requête n'a pas fonctionné");
+    });
+} //voir pour ecrire le fetch avec un methode post et non get (différent : revoir le cours)
+
 const buttonEnvoi = document.querySelector(".button-envoi");
 buttonEnvoi.addEventListener("click", function () {
   //on va recuperer l'email et le MDP de l'user
@@ -10,27 +34,10 @@ buttonEnvoi.addEventListener("click", function () {
   let motDePasse = document.getElementById("password");
   let motDePasseValue = motDePasse.value;
   console.log(motDePasseValue);
+
+  //Comme d'habitude, on a créé la fonction, medor sait s'asseoir, mais faut lui dire!
+  login(emailValue, motDePasseValue); //ce qui est crée en ligne 29 et 34, c'est avec ça qu'on va faire le fetch
 });
-
-async function login() {} //voir pour ecrire le fetch avec un methode post et non get (différent : revoir le cours)
-
-fetch("http://localhost:5678/api-docs/#/default/post_users_login", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json", //je ne sais pas ce que c'est
-  },
-  body: JSON.stringify({
-    // Les données à envoyer
-    key1: "emailValue",
-    key2: "motDePasseValue",
-  }),
-})
-  .then((response) => {
-    // Traiter la réponse
-  })
-  .catch((error) => {
-    // Gérer les erreurs
-  });
 
 //problème rechargement de la page
 
@@ -43,14 +50,4 @@ form.addEventListener("submit", (event) => {
   console.log("Il n’y a pas eu de rechargement de page");
 });
 
-form.addEventListener("submit", (event) => {
-  // On empêche le comportement par défaut
-  event.preventDefault();
-  console.log("Il n’y a pas eu de rechargement de page");
-
-  // On récupère les deux champs et on affiche leur valeur
-  const motDePasse = document.getElementById("password").value;
-  const email = document.getElementById("mail").value;
-  console.log(motDePasseValue);
-  console.log(emailValue);
-});
+//toujours use email et mdp fourni dans le readme
