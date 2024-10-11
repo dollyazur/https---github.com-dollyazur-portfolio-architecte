@@ -14,7 +14,7 @@ async function login(emailValue, motDePasseValue) {
     .then((response) => {
       // Traiter la réponse
       const data = response.json(); //On traduit la réponse en json, sinon on ne peut pas lire nous humains
-      console.log(data.token);
+      console.log(data);
     })
     .catch((error) => {
       // Gérer les erreurs c'est juste pour moi, l'user ne le voit pas
