@@ -38,6 +38,15 @@ const stopPropagation = function (e) {
 
 const focusInModal = function (e) {
   e.preventDefault();
+  //pour passer d'un element à l'autre avec le tab, on cherche l'index dans le tableau
+  let index = focusables.findIndex((f) => f === modal.querySelector(":focus"));
+  console.log(index); // ca marche
+  //on ranoute un cran et on utilise la taille totale pour revnir à zero une fois au bout comme le carouse
+  index++;
+  if (index >= focusables.length) {
+    index = 0;
+  }
+  focusables[index].focus();
 };
 
 document.querySelectorAll(".js-modal").forEach((a) => {
