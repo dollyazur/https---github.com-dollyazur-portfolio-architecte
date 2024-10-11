@@ -41,10 +41,20 @@ const focusInModal = function (e) {
   //pour passer d'un element à l'autre avec le tab, on cherche l'index dans le tableau
   let index = focusables.findIndex((f) => f === modal.querySelector(":focus"));
   console.log(index); // ca marche
+  // enleve un cran avec le tab shift
+  if (e.shifKey === true) {
+    index--;
+  } else {
+    index++;
+  }
+
   //on ranoute un cran et on utilise la taille totale pour revnir à zero une fois au bout comme le carouse
-  index++;
+
   if (index >= focusables.length) {
     index = 0;
+  }
+  if (index < 0) {
+    index = focusables.length - 1;
   }
   focusables[index].focus();
 };
