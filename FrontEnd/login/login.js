@@ -20,7 +20,7 @@ async function login(emailValue, motDePasseValue) {
       // Gérer les erreurs c'est juste pour moi, l'user ne le voit pas
       console.log("La requête n'a pas fonctionné");
     });
-} //voir pour ecrire le fetch avec un methode post et non get (différent : revoir le cours)
+}
 
 const buttonEnvoi = document.querySelector(".button-envoi");
 buttonEnvoi.addEventListener("click", function () {
