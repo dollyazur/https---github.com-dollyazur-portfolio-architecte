@@ -13,9 +13,16 @@ async function login(emailValue, motDePasseValue) {
   })
     .then((response) => {
       // Traiter la réponse
-      const data = response.json(); //On traduit la réponse en json, sinon on ne peut pas lire nous humains
-      console.log(data);
+      return response.json(); //On traduit la réponse en json, sinon on ne peut pas lire nous humains
     })
+    .then((data) => {
+      console.log(data);
+      let connexionToken = data.token;
+      console.log(connexionToken);
+      sessionStorage.setItem("connexionToken", connexionToken); //on stocke le token lisible dans la variable globale "sessionStorage)"
+      window.location.href = "../index.html";
+    })
+
     .catch((error) => {
       // Gérer les erreurs c'est juste pour moi, l'user ne le voit pas
       console.log("La requête n'a pas fonctionné");
