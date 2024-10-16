@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Modale Sophie Bluel</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <meta name="description" content="" />
+
+    <link rel="stylesheet" href="./modale.css" />
+    <script src="./modale.js" defer></script>
+  </head>
+  <body>
+    <a href="#modal1" class="js-modal">Ouvrir la boîte modale</a>
+
+    <a href="modale.html#modale2" class="js-modal">Ouvrir en ajax</a>
+
+    <aside
+      id="modal1"
+      class="modal"
+      aria-hidden="true"
+      role="dialog"
+      aria-labelledby="title-modal1"
+      style="display: none"
+    >
+      <div class="modal-wrapper js-modal-stop">
+        <button class="js-modal-close">Fermer la boîte modale</button>
+        <!-- ajoute le contenu -->
+        <input type="text" />
+        <h1 id="title-modal1">Galerie photo</h1>
+        <input type="text" />
+      </div>
+    </aside>
+  </body>
+</html>

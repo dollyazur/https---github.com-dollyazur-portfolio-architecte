@@ -1,11 +1,22 @@
 let modal = null; //permet de savoir quelle est la boite modale actuellement open
-const focusableSeletor = "button, a, input, textarea"; //toutes les choses que va "viser" le Tab
+const focusableSelector = "button, a, input, textarea"; //toutes les choses que va "viser" le Tab
 let focusables = []; //le tableau ou l'on stocke les focusables
 
-const openModal = function (e) {
+const openModal = async function (e) {
   e.preventDefault();
-  modal = document.querySelector(e.target.getAttribute("href"));
-  focusables = Array.from(modal.querySelectorAll(focusableSeletor)); //on récupère tout les élément du focusableSelector, mais on veux work with tableau donc un array.from sinon ca renvoie du node
+
+  const target = e.target.getAttribute("href");
+  if (target.startsWith("#")) {
+    modal = document.querySelector(target);
+  } else {
+    modal = await loadModal(target); //je lui passe l'url
+  }
+  if (!modal) {
+    console.error("modal not found");
+    return;
+  }
+  focusables = Array.from(modal.querySelectorAll(focusableSelector)); //on récupère tout les élément du focusableSelector, mais on veux work with tableau donc un array.from sinon ca renvoie du node
+
   modal.style.display = null;
   modal.removeAttribute("aria-hidden"); //on supprime l'élement puisqu'il redevient visible
   modal.setAttribute("aria-modal", "true");
@@ -60,6 +71,12 @@ const focusInModal = function (e) {
   focusables[index].focus();
 };
 
+const loadModal = async function (url) {
+  const html = await fetch(url).then((response) => response.text());
+  console.log(html);
+  //a revoir et a remplir
+};
+
 document.querySelectorAll(".js-modal").forEach((a) => {
   a.addEventListener("click", openModal);
 });
@@ -77,4 +94,4 @@ window.addEventListener("keydown", function (e) {
 });
 
 //notion d'accessibilité importante, accès au clavier, lecteur d'écran
-//
+//ajouter une croix pour fermer, fonction ajouter de la modale
