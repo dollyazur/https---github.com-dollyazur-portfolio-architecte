@@ -137,7 +137,7 @@ function genererMenuCategories(categories, projets) {
 }
 
 function modeEditeur() {
-  if (sessionStorage.getItem("connexionToken") !== null) {
+  if (localStorage.getItem("connexionToken") !== null) {
     console.log("L'utilisateur est connecté.");
   } else {
     console.log("L'utilsateur n'est pas connecté.");
@@ -146,6 +146,7 @@ function modeEditeur() {
 
 // Appel des fonctions pour récupérer les projets et les catégories, puis les afficher et générer le menu
 async function init() {
+  modeEditeur();
   const projets = await recupProjet(); // On récupère les projets
   const categories = await recupCategories(); // On récupère les catégories
 
@@ -153,8 +154,7 @@ async function init() {
   genererMenuCategories(categories, projets); // On génère le menu de catégorie
 }
 
-init(); // Initialisation du script
-modeEditeur(); // on verifie si l'user est connecté ou non
+init(); // on verifie si l'user est connecté ou non
 //Récupération des catégories :
 
 //La fonction recupCategories récupère les catégories depuis une API (ou tu peux les ajouter manuellement si elles ne sont pas disponibles via l'API).

@@ -19,7 +19,7 @@ async function login(emailValue, motDePasseValue) {
       console.log(data);
       let connexionToken = data.token;
       console.log(connexionToken);
-      sessionStorage.setItem("connexionToken", connexionToken); //on stocke le token lisible dans la variable globale "sessionStorage)"
+      localStorage.setItem("connexionToken", connexionToken); //on stocke le token lisible dans la variable globale "sessionStorage)"
       window.location.href = "../index.html";
     })
 
