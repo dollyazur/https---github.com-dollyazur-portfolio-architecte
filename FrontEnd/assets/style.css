@@ -280,3 +280,7 @@ footer nav ul {
 li img {
   width: 70%;
 }
+
+.inactive {
+  display: none;
+}

@@ -75,9 +75,38 @@ function genererMenuCategories(categories, projets) {
   });
 }
 
+function modeEditeur() {
+  if (localStorage.getItem("connexionToken") !== null) {
+    console.log("L'utilisateur est connecté.");
+    // je cache le lien login
+    let lienLogin = document.querySelector(".lien-login");
+    lienLogin.classList.add("inactive");
+    //afficher bandeau noir
+    //afficher le bouton modifier
+    //cacher les filtres
+  } else {
+    console.log("L'utilsateur n'est pas connecté.");
+    //je cache le lien logout
+    let lienLogout = document.querySelector(".lien-logout");
+    lienLogout.classList.add("inactive");
+    //cacher le bandeau noir
+    //use class list add ajouter une div dans le html "bandeau noir avec le contenu dedans"
+  }
+  let bandeaunNoir = document.querySelector;
+}
+
+let lienLogout = document.querySelector(".lien-logout");
+lienLogout.addEventListener("click", () => {
+  localStorage.removeItem("connexionToken");
+  console.log("Le token est supprimé, l'utilisateur est déconnecté.");
+  //rechargement de page
+  window.location.href = "index.html";
+});
+
 // Appel des fonctions pour récupérer les projets et les catégories, puis les afficher et générer le menu
 // d'abord on crée les fonctions et ensuite on les appelle
 async function init() {
+  modeEditeur();
   const projets = await recupProjet(); // On récupère les projets
   const categories = await recupCategories(); // On récupère les catégories
 
