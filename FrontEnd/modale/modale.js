@@ -72,9 +72,18 @@ const focusInModal = function (e) {
 };
 
 const loadModal = async function (url) {
+  const target = "#" + url.split("#")[1]; //pas compris //extraction de l'id de la modale
+  const existingModal = document.querySelector(target); // vérifie si la modale existe déjà dans le DOM
+  if (existingModal !== null) return existingModal; // une seule modale dans le code source quelque soit le nbre de fois qu'on ouvre la modale, optimise les performance, evite la répétition
   const html = await fetch(url).then((response) => response.text());
-  console.log(html);
-  //a revoir et a remplir
+  const element = document //pas compris
+    .createRange()
+    .createContextualFragment(html)
+    .querySelector(target); //pas compris //recupère la modale dans le html chargé
+  if (element === null)
+    throw `L'élément ${target} n'a pas été trouvé dans la page ${url}`; //en cas d'erreur
+  document.body.append(element); //pas compris // ajout de la modale au DOM
+  return element;
 };
 
 document.querySelectorAll(".js-modal").forEach((a) => {
