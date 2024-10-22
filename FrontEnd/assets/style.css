@@ -44,7 +44,6 @@ tt,
 var,
 b,
 u,
-i,
 center,
 dl,
 dt,
@@ -172,7 +171,6 @@ h2 {
   color: #1d6154;
 }
 
-/*****creation button  à terminer*/
 button {
   display: flex;
   font-size: 18px;
@@ -297,8 +295,14 @@ li img {
 .inactive {
   display: none;
 }
-
-i {
+.fa-solid {
+  display: flex;
+  color: #fafafa;
+  align-items: center;
+  padding-right: 10px;
+  font-weight: lighter;
+}
+.fa-regular {
   padding-bottom: 15px;
   padding-top: 15px;
   width: 20px;
