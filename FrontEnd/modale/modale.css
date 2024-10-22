@@ -73,7 +73,6 @@ html {
   width: 50px;
   height: 2px;
   display: flex;
-  position: absolute;
   background-color: #99e2d0;
   margin-bottom: 5px;
   padding-bottom: 50px;
