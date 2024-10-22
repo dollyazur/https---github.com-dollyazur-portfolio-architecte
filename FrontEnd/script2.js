@@ -78,21 +78,49 @@ function genererMenuCategories(categories, projets) {
 function modeEditeur() {
   if (localStorage.getItem("connexionToken") !== null) {
     console.log("L'utilisateur est connecté.");
+
     // je cache le lien login
     let lienLogin = document.querySelector(".lien-login");
     lienLogin.classList.add("inactive");
+
+    //j'affiche le logout
+    let lienLogout = document.querySelector(".lien-logout");
+    lienLogout.classList.remove("inactive");
+
     //afficher bandeau noir
+    let catListBandeauNoir = document.querySelector(".bandeau-noir");
+    catList.classList.remove("inactive");
+
     //afficher le bouton modifier
+    let modifier = document.querySelector(".lien-modale1");
+    modifier.classList.remove("inactive");
+
     //cacher les filtres
+    let catList = document.querySelector(".menu-categories");
+    catList.classList.add("inactive");
   } else {
     console.log("L'utilsateur n'est pas connecté.");
+
+    //j'affiche le login
+    let lienLogin = document.querySelector(".lien-login");
+    lienLogin.classList.remove("inactive");
+
     //je cache le lien logout
     let lienLogout = document.querySelector(".lien-logout");
     lienLogout.classList.add("inactive");
+
     //cacher le bandeau noir
-    //use class list add ajouter une div dans le html "bandeau noir avec le contenu dedans"
+    let catListBandeauNoir = document.querySelector(".bandeau-noir");
+    catListBandeauNoir.classList.add("inactive");
+
+    //cacher le bouton modifier
+    let modifier = document.querySelector(".lien-modale1");
+    modifier.remove("inactive");
+
+    //j'affiche les filtres
+    let catListMenuCategories = document.querySelector(".menu-categories");
+    catListMenuCategories.classList.remove("inactive");
   }
-  let bandeaunNoir = document.querySelector;
 }
 
 let lienLogout = document.querySelector(".lien-logout");

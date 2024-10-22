@@ -138,7 +138,7 @@ body {
 .bandeau-noir {
   display: flex;
   justify-content: center;
-  margin-bottom: 30px;
+  margin-bottom: 5px;
   background-color: black;
 }
 section {
@@ -189,6 +189,7 @@ button:hover {
 nav {
   display: flex;
   justify-content: space-between;
+  margin-top: 25px;
 }
 nav ul {
   display: flex;
