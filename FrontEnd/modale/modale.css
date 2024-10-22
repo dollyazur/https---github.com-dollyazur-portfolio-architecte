@@ -2,15 +2,18 @@ body,
 html {
   margin: 0;
   padding: 0;
+  max-width: 630px;
+  max-height: 688px;
 }
 
 * {
   box-sizing: border-box;
 }
-/* on voit bien les éléments qui sont focus*/
+/* on voit bien les éléments qui sont focus
 *:focus {
   box-shadow: 0 0 10px blue;
-}
+}*/
+
 .modal1 {
   position: fixed;
   display: flex;
@@ -30,4 +33,51 @@ html {
   max-height: calc(100vh - 20px);
   padding: 20px;
   background-color: #fff;
+}
+
+.js-modal-close {
+  border: none;
+  background-color: #fff;
+  font-size: larger;
+}
+.close-cross {
+  display: flex;
+  justify-content: flex-end;
+  font-size: larger;
+}
+
+#title-modal1 {
+  display: flex;
+  justify-content: center;
+  font-family: Work Sans;
+  font-weight: lighter;
+}
+
+.ajout-photo {
+  display: flex;
+  justify-content: center;
+  font-size: 18px;
+  border-radius: 60px;
+  padding: 7px 25px 7px 25px;
+  background-color: #1d6154;
+  color: white;
+  font-family: Syne;
+  padding-left: 40px;
+  padding-right: 40px;
+  margin-left: 120px;
+  margin-right: 130px;
+}
+
+.before {
+  content: "";
+  width: 50px;
+  height: 2px;
+  display: flex;
+  position: absolute;
+  background-color: #99e2d0;
+  margin-bottom: 5px;
+  padding-bottom: 50px;
+}
+a {
+  text-decoration: none;
 }

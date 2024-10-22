@@ -11,14 +11,18 @@
       rel="stylesheet"
     />
     <meta name="description" content="" />
-
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+      integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <link rel="stylesheet" href="./modale.css" />
     <script src="./modale.js" defer></script>
   </head>
   <body>
     <a href="#modal1" class="js-modal">Galerie photo</a>
-
-    <a href="modale2.html#modale2" class="js-modal">Ajouter une photo</a>
 
     <aside
       id="modal1"
@@ -29,11 +33,21 @@
       style="display: none"
     >
       <div class="modal-wrapper js-modal-stop">
-        <button class="js-modal-close">Fermer la boîte modale</button>
+        <div class="close-cross">
+          <button class="js-modal-close">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
         <!-- ajoute le contenu -->
-        <input type="text" />
+
         <h1 id="title-modal1">Galerie photo</h1>
-        <input type="text" />
+        <!--recupérer images dans la gallery-->
+        <p class="before"></p>
+        <div class="ajout-photo">
+          <a href="modale2.html#modale2" class="js-modal" style="color: white"
+            >Ajouter une photo</a
+          >
+        </div>
       </div>
     </aside>
   </body>
