@@ -136,10 +136,11 @@ body {
   font-size: 14px;
   background-color: #fffef8;
 }
-header {
+.bandeau-noir {
   display: flex;
-  justify-content: space-between;
-  margin: 50px 0;
+  justify-content: center;
+  margin-bottom: 30px;
+  background-color: black;
 }
 section {
   margin: 50px 0;
@@ -152,6 +153,7 @@ h1 {
   font-size: 22px;
   font-weight: 800;
   color: #b1663c;
+  background-color: #fffef8;
 }
 
 h1 > span {
@@ -160,6 +162,7 @@ h1 > span {
   letter-spacing: 0.1em;
   text-transform: uppercase;
   padding-top: 7px;
+  background-color: #fffef8;
 }
 
 h2 {
@@ -171,13 +174,23 @@ h2 {
 
 /*****creation button  à terminer*/
 button {
-  width: 100px;
-  height: 37px;
-  top: 813px;
-  left: 427px;
-  gap: 0px;
+  display: flex;
+  font-size: 18px;
   border-radius: 60px;
   border: 1px solid #1d6154;
+  padding: 7px 25px 7px 25px;
+  margin-right: 10px;
+  color: #1d6154;
+  font-family: Syne;
+}
+
+button:hover {
+  background-color: #1d6154;
+  color: white;
+}
+nav {
+  display: flex;
+  justify-content: space-between;
 }
 nav ul {
   display: flex;
@@ -283,4 +296,23 @@ li img {
 
 .inactive {
   display: none;
+}
+
+i {
+  padding-bottom: 15px;
+  padding-top: 15px;
+  width: 20px;
+  height: 20px;
+}
+.edition {
+  color: white;
+  padding-bottom: 15px;
+  padding-top: 15px;
+}
+
+.menu-categories {
+  display: flex;
+  justify-content: center;
+  padding: 40px;
+  margin-bottom: 10px;
 }
