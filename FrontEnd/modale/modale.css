@@ -94,3 +94,21 @@ i.fa-regular.fa-image {
   font-family: Work Sans;
   font-weight: lighter;
 }
+
+/*a finir*/
+.rajout-photo {
+  display: flex;
+  justify-content: center;
+  font-size: 18px;
+  border-radius: 60px;
+  padding: 7px 25px 7px 25px;
+  padding-left: 40px;
+  padding-right: 40px;
+  margin-left: 120px;
+  margin-right: 130px;
+}
+
+.jpg {
+  display: flex;
+  justify-content: center;
+}
