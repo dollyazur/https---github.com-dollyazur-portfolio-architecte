@@ -80,3 +80,10 @@ html {
 a {
   text-decoration: none;
 }
+
+i.fa-regular.fa-image {
+  display: flex;
+  font-size: xxx-large;
+  color: #b8b8b8;
+  justify-content: center;
+}
