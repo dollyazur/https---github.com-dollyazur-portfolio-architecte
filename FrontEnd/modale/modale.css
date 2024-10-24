@@ -128,4 +128,23 @@ i.fa-regular.fa-image {
   border: none;
   box-shadow: rgba(16, 17, 19, 0.23) 0px 3px 10px;
   margin-bottom: 30px;
+  font-family: Work Sans;
+  width: 100%;
+  height: 50px;
+}
+.main-title {
+  margin-bottom: 15px;
+}
+
+.validation {
+  display: flex;
+  justify-content: center;
+  background-color: #a7a7a7;
+  font-size: 18px;
+  border-radius: 60px;
+  padding: 10px 0px 10px 0px;
+  color: white;
+  font-family: Syne;
+  font-size: small;
+  margin: 50px 160px 0px 150px;
 }
