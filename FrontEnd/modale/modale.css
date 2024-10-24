@@ -87,3 +87,10 @@ i.fa-regular.fa-image {
   color: #b8b8b8;
   justify-content: center;
 }
+
+#title-modal2 {
+  display: flex;
+  justify-content: center;
+  font-family: Work Sans;
+  font-weight: lighter;
+}
