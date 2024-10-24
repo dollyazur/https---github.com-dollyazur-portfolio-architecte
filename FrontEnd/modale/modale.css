@@ -122,3 +122,10 @@ i.fa-regular.fa-image {
   box-shadow: rgba(13, 14, 15, 0.23) 0px 6px 10px;
   margin-bottom: 50px;
 }
+
+.titre,
+.categorie {
+  border: none;
+  box-shadow: rgba(16, 17, 19, 0.23) 0px 3px 10px;
+  margin-bottom: 30px;
+}
