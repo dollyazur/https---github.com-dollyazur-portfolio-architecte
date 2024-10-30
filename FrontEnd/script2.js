@@ -88,16 +88,16 @@ function modeEditeur() {
     lienLogout.classList.remove("inactive");
 
     //afficher bandeau noir
-    let catListBandeauNoir = document.querySelector(".bandeau-noir");
-    catList.classList.remove("inactive");
+    let BandeauNoir = document.querySelector(".bandeau-noir");
+    BandeauNoir.classList.remove("inactive");
 
     //afficher le bouton modifier
     let modifier = document.querySelector(".lien-modale1");
     modifier.classList.remove("inactive");
 
     //cacher les filtres
-    let catList = document.querySelector(".menu-categories");
-    catList.classList.add("inactive");
+    let menuCategories = document.querySelector(".menu-categories");
+    menuCategories.classList.add("inactive");
   } else {
     console.log("L'utilsateur n'est pas connecté.");
 
@@ -110,16 +110,16 @@ function modeEditeur() {
     lienLogout.classList.add("inactive");
 
     //cacher le bandeau noir
-    let catListBandeauNoir = document.querySelector(".bandeau-noir");
-    catListBandeauNoir.classList.add("inactive");
+    let BandeauNoir = document.querySelector(".bandeau-noir");
+    BandeauNoir.classList.add("inactive");
 
     //cacher le bouton modifier
     let modifier = document.querySelector(".lien-modale1");
     modifier.remove("inactive");
 
     //j'affiche les filtres
-    let catListMenuCategories = document.querySelector(".menu-categories");
-    catListMenuCategories.classList.remove("inactive");
+    let menuCategories = document.querySelector(".menu-categories");
+    menuCategories.classList.remove("inactive");
   }
 }
 
@@ -130,6 +130,24 @@ lienLogout.addEventListener("click", () => {
   //rechargement de page
   window.location.href = "index.html";
 });
+
+//gestion ouverture/fermeture modale
+function openModal() {
+  // Ajout du lien CSS pour modale.css
+  let modalStylesheet = document.createElement("link");
+  modalStylesheet.rel = "stylesheet";
+  modalStylesheet.href = "./modale/modale.css";
+  modalStylesheet.classList.add("modal-stylesheet"); // Pour l'identifier et la retirer plus tard
+  document.head.appendChild(modalStylesheet);
+
+  // Autres actions pour ouvrir la modale
+}
+
+function closeModal() {
+  // Retrait du lien CSS pour modale.css
+  const modalStylesheet = document.querySelector(".modal-stylesheet");
+  if (modalStylesheet) modalStylesheet.remove();
+}
 
 // Appel des fonctions pour récupérer les projets et les catégories, puis les afficher et générer le menu
 // d'abord on crée les fonctions et ensuite on les appelle

@@ -19,8 +19,9 @@
       referrerpolicy="no-referrer"
     />
     <link rel="stylesheet" href="./assets/style.css" />
-    <link rel="stylesheet" href="./modale.css" />
+    
     <script type="module" src="./script2.js" defer></script>
+    <script src="./modale/modale.js" defer></script>
   </head>
   <body>
     <header class="bandeau-noir">
@@ -170,8 +171,11 @@
         ><p class="footer-txt">Mentions légales</p>
       </a>
     </footer>
-
+    
+<!-- overlay pour obscurcir le fond-->
+<div id="overlay" class="overlay"></div>
 <!-- Modale Galerie photo (modale.html) -->
+
     <aside
       id="modal1"
       class="modal"
@@ -182,7 +186,7 @@
     >
       <div class="modal-wrapper js-modal-stop">
         <div class="close-cross">
-          <a href="../index.html">
+          <a href="./index.html">
             <button class="js-modal-close">
               <i class="fa-solid fa-xmark"></i>
             </button>
@@ -212,7 +216,7 @@
   >
     <div class="modal-wrapper js-modal-stop">
       <div class="arrow">
-        <a href="../index.html">
+        <a href="./index.html">
           <i class="fa-solid fa-arrow-left"></i>
         </a>
         <div class="close-cross">
@@ -240,7 +244,7 @@
   </aside>
 
 <!-- JavaScript pour les modales -->
-  <script src="./modale.js" defer></script>
+  
   
   </body>
 </html>
