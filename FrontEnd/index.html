@@ -19,6 +19,7 @@
       referrerpolicy="no-referrer"
     />
     <link rel="stylesheet" href="./assets/style.css" />
+    <link rel="stylesheet" href="./modale.css" />
     <script type="module" src="./script2.js" defer></script>
   </head>
   <body>
@@ -169,5 +170,77 @@
         ><p class="footer-txt">Mentions légales</p>
       </a>
     </footer>
+
+<!-- Modale Galerie photo (modale.html) -->
+    <aside
+      id="modal1"
+      class="modal"
+      aria-hidden="true"
+      role="dialog"
+      aria-labelledby="title-modal1"
+      style="display: none"
+    >
+      <div class="modal-wrapper js-modal-stop">
+        <div class="close-cross">
+          <a href="../index.html">
+            <button class="js-modal-close">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </a>
+        </div>
+        <!-- ajoute le contenu -->
+
+        <h1 id="title-modal1">Galerie photo</h1>
+        <!--recupérer images dans la gallery-->
+
+        <hr />
+        
+        <div class="ajout-photo">
+          <a href="#modale2" class="js-modal" style="color: white">Ajouter une photo</a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Modale Ajouter photo (modale2.html) -->
+    <aside
+    id="modale2"
+    class="modal"
+    aria-hidden="true"
+    role="dialog"
+    aria-labelledby="title-modal2"
+    style="display: none"
+  >
+    <div class="modal-wrapper js-modal-stop">
+      <div class="arrow">
+        <a href="../index.html">
+          <i class="fa-solid fa-arrow-left"></i>
+        </a>
+        <div class="close-cross">
+        <button class="js-modal-close">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <h1 id="title-modal2">Ajout photo</h1>
+      <div class="fond-bleu">
+        <i class="fa-regular fa-image"></i>
+        <p class="rajout-photo">+ Ajouter photo</p>
+        <!--doit etre relié à l'API photo-->
+        <p class="jpg">jpg. png : 4mo max</p>
+      </div>
+      <div class="main-title">Titre</div>
+      <input class="titre" type="text" />
+
+      <div class="main-title">Catégorie</div>
+      <input class="categorie" type="text" />
+      <!--relier à l'API pour les categ-->
+      <hr />
+      <div class="validation">Valider</div>
+    </div>
+  </aside>
+
+<!-- JavaScript pour les modales -->
+  <script src="./modale.js" defer></script>
+  
   </body>
 </html>
