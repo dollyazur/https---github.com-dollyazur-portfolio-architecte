@@ -139,44 +139,45 @@ const overlay = document.getElementById("overlay");
 const modal1 = document.getElementById("modal1");
 const modal2 = document.getElementById("modale2");
 
-function openModal() {
+function openModal(modal) {
   //ajout des display
-  modal.style.display = "block";
-  overlay.style.display = "block";
-  // Ajout du lien CSS pour modale.css
-  let modalStylesheet = document.createElement("link");
-  modalStylesheet.rel = "stylesheet";
-  modalStylesheet.href = "./modale/modale.css";
-  modalStylesheet.classList.add("modal-stylesheet"); // Pour l'identifier et la retirer plus tard
-  document.head.appendChild(modalStylesheet);
-
+  if (modal) {
+    modal.style.display = "block";
+    overlay.style.display = "block";
+    // Ajout du lien CSS pour modale.css
+    let modalStylesheet = document.createElement("link");
+    modalStylesheet.rel = "stylesheet";
+    modalStylesheet.href = "./modale/modale.css";
+    modalStylesheet.classList.add("modal-stylesheet"); // Pour l'identifier et la retirer plus tard
+    document.head.appendChild(modalStylesheet);
+  }
   // Autres actions pour ouvrir la modale
 }
 
 function closeModal() {
   //ajout des display
-  modal1.style.display = "none";
-  modal2.style.display = "none";
-  overlay.style.display = "none";
+  if (modal1) modal1.style.display = "none";
+  if (modal2) modal2.style.display = "none";
+  if (overlay) overlay.style.display = "none";
   // Retrait du lien CSS pour modale.css
   const modalStylesheet = document.querySelector(".modal-stylesheet");
   if (modalStylesheet) modalStylesheet.remove();
 }
 
 //Ecouteurs d'evenements pour ouverture/fermeture modale
-document.querySelector(".js-open-modal2").addEventListener("click", (e) => {
+document.querySelector(".js-open-modal2")?.addEventListener("click", (e) => {
   e.preventDefault();
   closeModal(); // Ferme la première modale si elle est ouverte
   openModal(modal2); // Ouvre la deuxième modale
 });
 
-overlay.addEventListener("click", closeModal);
+overlay?.addEventListener("click", closeModal);
 document.querySelectorAll(".js-modal-close").forEach((button) => {
   button.addEventListener("click", closeModal);
 });
 
 // Écouteur d'événement pour ouvrir modal1
-document.querySelector(".js-modal").addEventListener("click", (e) => {
+document.querySelector(".js-modal")?.addEventListener("click", (e) => {
   e.preventDefault();
   openModal(modal1); // Ouvre la première modale
 });

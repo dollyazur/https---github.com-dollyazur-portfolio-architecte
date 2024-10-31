@@ -148,3 +148,7 @@ i.fa-regular.fa-image {
   font-size: small;
   margin: 50px 160px 0px 150px;
 }
+
+.inactive {
+  display: none;
+}
