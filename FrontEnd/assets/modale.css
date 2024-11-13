@@ -185,8 +185,21 @@ i.fa-regular.fa-image {
 
 .gallery-modale figure {
   width: 18%;
+  position: relative; /* Positionner la figure en conteneur pour les éléments absolus */
 }
 
 .gallery-modale img {
   width: 100%;
+  height: auto;
+  display: block;
+}
+
+.icon-poubelle {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 17px; /* Ajustez la taille de l'icône si nécessaire */
+  height: 17px;
+  cursor: pointer;
+  z-index: 1;
 }

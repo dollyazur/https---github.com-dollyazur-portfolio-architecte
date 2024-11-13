@@ -60,10 +60,10 @@ function afficherProjetModale(projets) {
     );
 
     // Positionner l'icône de poubelle
-    figure.style.position = "relative"; // Conteneur relatif pour la position absolue
-    poubelle.style.position = "absolute";
-    poubelle.style.top = "10px"; // Positionner selon vos besoins  //possible en css??
-    poubelle.style.right = "10px"; // Positionner selon vos besoins
+    //figure.style.position = "relative"; // Conteneur relatif pour la position absolue
+    //poubelle.style.position = "absolute";
+    //poubelle.style.top = "10px"; // Positionner selon vos besoins  //possible en css??
+    //poubelle.style.right = "10px"; // Positionner selon vos besoins
 
     // On ajoute l'image et le titre dans la figure
     figure.appendChild(img);
