@@ -196,10 +196,10 @@ i.fa-regular.fa-image {
 
 .icon-poubelle {
   position: absolute;
-  top: 0px;
-  right: 0px;
-  width: 17px; /* Ajustez la taille de l'icône si nécessaire */
-  height: 17px;
+  top: 5px;
+  right: 5px;
+  width: 17px !important;
+  height: 17px !important;
   cursor: pointer;
   z-index: 1;
 }
