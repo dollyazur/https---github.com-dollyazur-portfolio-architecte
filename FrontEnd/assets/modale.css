@@ -94,6 +94,8 @@ html {
   padding-right: 40px;
   margin-left: 120px;
   margin-right: 130px;
+  margin-top: 50px;
+  margin-bottom: 50px;
 }
 
 .before {
@@ -124,10 +126,9 @@ i.fa-regular.fa-image {
   font-size: 18px;
   border-radius: 60px;
   padding: 7px 25px 7px 25px;
-  padding-left: 40px;
-  padding-right: 40px;
-  margin-left: 120px;
-  margin-right: 130px;
+  margin-left: 160px;
+  margin-right: 160px;
+  margin-bottom: 10px;
   color: #306685;
 }
 
@@ -135,7 +136,7 @@ i.fa-regular.fa-image {
   display: flex;
   justify-content: center;
   color: grey;
-  font-size: small;
+  font-size: x-small;
 }
 
 .fond-bleu {
@@ -144,6 +145,8 @@ i.fa-regular.fa-image {
   padding-bottom: 15px;
   box-shadow: rgba(13, 14, 15, 0.23) 0px 6px 10px;
   margin-bottom: 50px;
+  padding-bottom: 50px;
+  padding-top: 50px;
 }
 
 .titre,
@@ -181,6 +184,9 @@ i.fa-regular.fa-image {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+  margin-bottom: 50px;
+  margin-left: 50px;
+  margin-right: 50px;
 }
 
 .gallery-modale figure {
