@@ -54,7 +54,7 @@ function afficherProjetModale(projets) {
     poubelle.alt = "Supprimer";
     poubelle.classList.add("icon-poubelle"); // Ajouter une classe pour le style
 
-    // Ajouter un écouteur d'événement pour supprimer le projet
+    //rajouter un écouteur d'évènement sur les poubelles qui appellera la fonction supprimerProjet()
     poubelle.addEventListener("click", () =>
       supprimerProjet(projet.id, figure)
     );
@@ -280,8 +280,6 @@ async function init() {
   afficherProjet(projets); // On affiche tous les projets par défaut
   afficherProjetModale(projets); // On affiche tous les projets par défaut dans la modale 1
   genererMenuCategories(categories, projets); // On génère le menu de catégories
-
-  //rajouter un écouteur d'évènement sur les poubelles qui appellera la fonction supprimerProjet()
 }
 
 init(); // Initialisation du script
