@@ -126,6 +126,8 @@ function genererMenuDeroulantCategories(categories) {
   categories.forEach((categorie) => {
     const option = document.createElement("option");
     option.textContent = categorie.name; // qui est nommé par nom !!!
+    option.value = categorie.id; //quand on envoie le projet, on fait une requête POST, on va send img, title et categ. Sauf que la categ, on envoie pas son nom mais son id, sinon api pas comprendre
+
     //on le rattache à son parent qui est select
     //parent.appendChild(enfant)
     select.appendChild(option);
