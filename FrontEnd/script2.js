@@ -107,7 +107,7 @@ function supprimerProjet(id, figure) {
     });
 }
 
-//trier
+//trier  //a ajouter pour la modale2////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Fonction pour récupérer les catégories de l'API (si disponible) ou depuis des données locales
 async function recupCategories() {

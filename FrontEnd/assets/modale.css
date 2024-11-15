@@ -113,10 +113,13 @@ a {
 }
 
 i.fa-regular.fa-image {
+  width: 100%;
   display: flex;
   font-size: xxx-large;
   color: #c5c3c3;
   justify-content: center;
+  position: relative;
+  bottom: 40px;
 }
 
 .rajout-photo {
@@ -208,4 +211,8 @@ i.fa-regular.fa-image {
   height: 17px !important;
   cursor: pointer;
   z-index: 1;
+}
+.body-modale2 {
+  margin-left: 50px;
+  margin-right: 50px;
 }
