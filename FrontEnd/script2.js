@@ -59,12 +59,6 @@ function afficherProjetModale(projets) {
       supprimerProjet(projet.id, figure)
     );
 
-    // Positionner l'icône de poubelle
-    //figure.style.position = "relative"; // Conteneur relatif pour la position absolue
-    //poubelle.style.position = "absolute";
-    //poubelle.style.top = "10px"; // Positionner selon vos besoins  //possible en css??
-    //poubelle.style.right = "10px"; // Positionner selon vos besoins
-
     // On ajoute l'image et le titre dans la figure
     figure.appendChild(img);
     figure.appendChild(poubelle);
@@ -92,7 +86,6 @@ function supprimerProjet(id, figure) {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
-      // "Authorization": `Bearer ${token}` // Ajout de l'authentification
     },
   })
     .then((response) => {
@@ -121,6 +114,22 @@ async function recupCategories() {
     console.error("Erreur lors de la récupération des catégories : ", error);
     return []; // On retourne un tableau vide en cas d'erreur
   }
+}
+
+function genererMenuDeroulantCategories(categories) {
+  //on va afficher les balises options qui correspondent aux differentes catégories dans le formulaire
+  // on va recup le select qu'on a créé dans l'index (ligne 241)
+  //c'est le select qui fait que soit un menu déroulant, ne pas use un input, les infos sont dans le htlm
+  //le select est le parent, il a des children, ce sont les options
+  const select = document.querySelector(".categorie");
+
+  categories.forEach((categorie) => {
+    const option = document.createElement("option");
+    option.textContent = categorie.name; // qui est nommé par nom !!!
+    //on le rattache à son parent qui est select
+    //parent.appendChild(enfant)
+    select.appendChild(option);
+  });
 }
 
 // Fonction pour générer dynamiquement le menu de catégories
@@ -280,6 +289,9 @@ async function init() {
   afficherProjet(projets); // On affiche tous les projets par défaut
   afficherProjetModale(projets); // On affiche tous les projets par défaut dans la modale 1
   genererMenuCategories(categories, projets); // On génère le menu de catégories
+  //rappel fonction médor, on lui a appris à s'aaseoir mais on lui a pas dit! donc forcement il ne fait pas
+  //generer nom de la function + use cont categories (ligne 287) puisque que c'est elle qui gère la recup des categ
+  genererMenuDeroulantCategories(categories);
 }
 
 init(); // Initialisation du script
