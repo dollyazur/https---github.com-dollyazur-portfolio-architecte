@@ -123,6 +123,16 @@ function genererMenuDeroulantCategories(categories) {
   //le select est le parent, il a des children, ce sont les options
   const select = document.querySelector(".categorie");
 
+  // Création du message de choix
+  const optionParDefaut = document.createElement("option");
+  optionParDefaut.textContent = "Choix de la catégorie";
+  optionParDefaut.value = ""; // Pas de valeur spécifique
+  optionParDefaut.disabled = true; // Désactive l'option pour éviter qu'on la selectionne
+  optionParDefaut.selected = true; // Définit cette option comme sélectionnée par défaut
+
+  // Ajout de l'option par défaut au menu déroulant
+  select.appendChild(optionParDefaut);
+
   categories.forEach((categorie) => {
     const option = document.createElement("option");
     option.textContent = categorie.name; // qui est nommé par nom !!!
