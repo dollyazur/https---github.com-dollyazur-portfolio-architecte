@@ -233,12 +233,12 @@ async function envoyerFormulaire(titre, categorie, fichier) {
   try {
     const response = await fetch("http://localhost:5678/api/projects", {
       method: "POST",
-      body: formData,
+      body: formData, //c'est quoi?
     });
 
     if (response.ok) {
       alert("Projet ajouté avec succès !");
-      document.querySelector("#titre").value = "";
+      document.querySelector(".main-titre").value = "";
       document.querySelector(".categorie").value = "";
       document.querySelector("#fichier").value = "";
 
