@@ -180,18 +180,23 @@ i.fa-regular.fa-image {
   margin-bottom: 15px;
 }
 
-.valider {
+.validation {
   display: flex;
   justify-content: center;
+}
+
+.valider {
   background-color: #a7a7a7;
   font-size: 18px;
   border: none;
   border-radius: 60px;
-  padding: 10px 0px 10px 0px;
   color: white;
   font-family: Syne;
-  font-size: small;
-  margin: 50px 160px 0px 150px;
+  font-size: medium;
+  padding-left: 80px;
+  padding-right: 80px;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
 .inactive {

@@ -226,15 +226,17 @@ async function envoyerFormulaire(titre, categorie, fichier) {
   formData.append("category", categorie);
   formData.append("image", fichier);
 
+  const token = localStorage.getItem("connexionToken");
   try {
-    const response = await fetch("http://localhost:5678/api/projects", {
+    const response = await fetch("http://localhost:5678/api/works", {
       method: "POST",
+      headers: { Authorization: `Bearer ${token}` },
       body: formData, //c'est quoi?
     });
 
     if (response.ok) {
       alert("Projet ajouté avec succès !");
-      document.querySelector(".main-titre").value = "";
+      document.querySelector(".main-title").value = "";
       document.querySelector(".categorie").value = "";
       document.querySelector("#fichier").value = "";
 

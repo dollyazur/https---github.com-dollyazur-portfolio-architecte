@@ -406,4 +406,5 @@ li img {
   transform: translate(-50%, -50%);
   z-index: 20;
   /* Doit être au-dessus de l'overlay */
+  border-radius: 30px;
 }
