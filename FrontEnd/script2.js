@@ -79,14 +79,12 @@ function supprimerProjet(id, figure) {
   figure.remove();
 
   // Définir le jeton d'authentification (exemple)
-  //const token = "VOTRE_JETON_D_AUTHENTIFICATION"; // Remplacez par votre token
+  const token = localStorage.getItem("connexionToken");
 
   // Requête API pour supprimer le projet dans la base de données
   fetch(`http://localhost:5678/api/works/${id}`, {
     method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-    },
+    headers: { Authorization: `Bearer ${token}` },
   })
     .then((response) => {
       if (response.ok) {

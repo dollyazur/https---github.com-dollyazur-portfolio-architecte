@@ -180,11 +180,12 @@ i.fa-regular.fa-image {
   margin-bottom: 15px;
 }
 
-.validation {
+.valider {
   display: flex;
   justify-content: center;
   background-color: #a7a7a7;
   font-size: 18px;
+  border: none;
   border-radius: 60px;
   padding: 10px 0px 10px 0px;
   color: white;
