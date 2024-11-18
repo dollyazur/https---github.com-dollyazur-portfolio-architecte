@@ -207,8 +207,6 @@ document.querySelector("#fichier").addEventListener("change", (event) => {
       const apercu = document.createElement("img");
       apercu.src = e.target.result;
       apercu.alt = "Aperçu de l'image";
-      apercu.style.maxWidth = "100%";
-      apercu.style.marginTop = "10px";
 
       // Supprime l'ancien aperçu, s'il existe
       const anciennePreview = document.querySelector(".preview-image");

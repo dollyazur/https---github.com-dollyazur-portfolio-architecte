@@ -158,12 +158,12 @@ i.fa-regular.fa-image {
 }
 
 .fond-bleu img {
-  max-width: 100%;
-  margin-top: 10px;
-  display: flex;
+  width: 40%;
+  max-height: 180px;
+  object-fit: cover; /* L'image remplit la zone sans se déformer */
   position: absolute;
-  top: 0;
-  max-height: 100%;
+  top: 119px;
+  left: 180px;
 }
 
 .titre,
