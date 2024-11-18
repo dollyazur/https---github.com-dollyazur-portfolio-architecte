@@ -144,58 +144,56 @@ function genererMenuDeroulantCategories(categories) {
 
 //chatgpt//
 // Écouteur pour l'ajout de photo via le p.rajout-photo
-document
-  .querySelector(".p-rajout-photo")
-  .addEventListener("click", async () => {
-    const titreInput = document.querySelector(".main-title"); // Champ de titre dans la modale
-    const categorieSelect = document.querySelector(".categorie"); // Menu déroulant des catégories
-    const fichierInput = document.querySelector("#fichier"); // Champ d'upload de fichier
+document.querySelector(".rajout-photo").addEventListener("click", async () => {
+  const titreInput = document.querySelector("#titre"); // Champ de titre dans la modale
+  const categorieSelect = document.querySelector(".categorie"); // Menu déroulant des catégories
+  const fichierInput = document.querySelector("#fichier"); // Champ d'upload de fichier
+  console.log(document.querySelector(".rajout-photo"));
+  // Récupération des valeurs
+  const titre = titreInput.value.trim();
+  const categorieId = categorieSelect.value;
+  const fichier = fichierInput.files[0];
 
-    // Récupération des valeurs
-    const titre = titreInput.value.trim();
-    const categorieId = categorieSelect.value;
-    const fichier = fichierInput.files[0];
+  // Vérification des champs requis
+  if (!titre || !categorieId || !fichier) {
+    alert(
+      "Veuillez remplir tous les champs obligatoires (titre, catégorie, et image)."
+    );
+    return;
+  }
 
-    // Vérification des champs requis
-    if (!titre || !categorieId || !fichier) {
-      alert(
-        "Veuillez remplir tous les champs obligatoires (titre, catégorie, et image)."
-      );
-      return;
+  // Préparation des données pour l'API
+  const formData = new FormData();
+  formData.append("title", titre);
+  formData.append("category", categorieId);
+  formData.append("image", fichier);
+
+  try {
+    // Envoi à l'API
+    const response = await fetch("http://localhost:5678/api/works", {
+      method: "POST",
+      body: formData,
+    });
+
+    if (response.ok) {
+      // Si tout s'est bien passé
+      alert("Projet ajouté avec succès !");
+      titreInput.value = ""; // Réinitialisation du champ titre
+      categorieSelect.value = ""; // Réinitialisation de la catégorie
+      fichierInput.value = ""; // Réinitialisation de l'input fichier
+
+      // Actualisation de la galerie
+      chargerGalerie(); // Une fonction qui recharge la galerie après ajout
+    } else {
+      // Si l'API renvoie une erreur
+      const errorMessage = await response.text();
+      alert(`Erreur lors de l'ajout du projet : ${errorMessage}`);
     }
-
-    // Préparation des données pour l'API
-    const formData = new FormData();
-    formData.append("title", titre);
-    formData.append("category", categorieId);
-    formData.append("image", fichier);
-
-    try {
-      // Envoi à l'API
-      const response = await fetch("http://localhost:5678/api/works", {
-        method: "POST",
-        body: formData,
-      });
-
-      if (response.ok) {
-        // Si tout s'est bien passé
-        alert("Projet ajouté avec succès !");
-        titreInput.value = ""; // Réinitialisation du champ titre
-        categorieSelect.value = ""; // Réinitialisation de la catégorie
-        fichierInput.value = ""; // Réinitialisation de l'input fichier
-
-        // Actualisation de la galerie
-        chargerGalerie(); // Une fonction qui recharge la galerie après ajout
-      } else {
-        // Si l'API renvoie une erreur
-        const errorMessage = await response.text();
-        alert(`Erreur lors de l'ajout du projet : ${errorMessage}`);
-      }
-    } catch (error) {
-      console.error("Erreur lors de l'envoi du projet :", error);
-      alert("Une erreur est survenue. Veuillez réessayer plus tard.");
-    }
-  });
+  } catch (error) {
+    console.error("Erreur lors de l'envoi du projet :", error);
+    alert("Une erreur est survenue. Veuillez réessayer plus tard.");
+  }
+});
 
 document.querySelector("#fichier").addEventListener("change", (event) => {
   const fichier = event.target.files[0];
@@ -236,7 +234,7 @@ async function envoyerFormulaire(titre, categorie, fichier) {
 
     if (response.ok) {
       alert("Projet ajouté avec succès !");
-      document.querySelector(".main-title").value = "";
+      document.querySelector("#titre").value = "";
       document.querySelector(".categorie").value = "";
       document.querySelector("#fichier").value = "";
 
