@@ -123,7 +123,7 @@ i.fa-regular.fa-image {
   bottom: 40px;
 }
 
-.rajout-photo {
+.p-rajout-photo {
   display: flex;
   justify-content: center;
   background-color: #e2e2e2;
@@ -151,6 +151,10 @@ i.fa-regular.fa-image {
   margin-bottom: 50px;
   padding-bottom: 50px;
   padding-top: 50px;
+}
+
+.fond-bleu label {
+  cursor: pointer;
 }
 
 .titre,

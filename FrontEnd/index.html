@@ -226,23 +226,53 @@
             </button>
           </div>
         </div>
+
         <div class="body-modale2">
           <h3 id="title-modal2">Ajout photo</h3>
+
+          <!-- Section pour l'ajout de fichier -->
           <div class="fond-bleu">
-            <i class="fa-regular fa-image"></i>
-            <p class="rajout-photo">+ Ajouter photo</p>
-            <!--doit etre relié à l'API photo-->
+            <label for="fichier" class="rajout-photo">
+              <i class="fa-regular fa-image"></i>
+              <p class="p-rajout-photo">+ Ajouter photo</p>
+            </label>
+            <input
+              type="file"
+              id="fichier"
+              accept="image/png, image/jpeg"
+              required
+              style="display: none"
+            />
             <p class="jpg">jpg. png : 4mo max</p>
           </div>
-          <div class="main-title">Titre</div>
-          <input class="titre" type="text" />
 
+          <!-- Champ de titre -->
+          <div class="main-title">Titre</div>
+          <input
+            class="titre"
+            id="titre"
+            type="text"
+            placeholder="Titre"
+            required
+          />
+
+          <!-- Menu déroulant pour les catégories -->
           <div class="main-title">Catégorie</div>
-          <select class="categorie" name="categorie"></select>
-          <!--relier à l'API pour les categ-->
+          <select class="categorie" name="categorie" required>
+            <option value="">Choix de la catégorie</option>
+            <!-- Options générées dynamiquement -->
+          </select>
+
+          <!-- Ligne de séparation -->
           <hr />
-          <div class="validation">Valider</div>
+
+          <!-- Bouton de validation -->
+          <div class="validation">
+            <button type="button" class="valider">Valider</button>
+          </div>
         </div>
+
+        <div class="galerie"></div>
       </div>
     </aside>
 

@@ -100,7 +100,7 @@ function supprimerProjet(id, figure) {
     });
 }
 
-//trier  //a ajouter pour la modale2////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//trier
 
 // Fonction pour récupérer les catégories de l'API (si disponible) ou depuis des données locales
 async function recupCategories() {
@@ -142,6 +142,150 @@ function genererMenuDeroulantCategories(categories) {
     //parent.appendChild(enfant)
     select.appendChild(option);
   });
+}
+
+//chatgpt//
+// Écouteur pour l'ajout de photo via le p.rajout-photo
+document
+  .querySelector(".p-rajout-photo")
+  .addEventListener("click", async () => {
+    const titreInput = document.querySelector(".main-title"); // Champ de titre dans la modale
+    const categorieSelect = document.querySelector(".categorie"); // Menu déroulant des catégories
+    const fichierInput = document.querySelector("#fichier"); // Champ d'upload de fichier
+
+    // Récupération des valeurs
+    const titre = titreInput.value.trim();
+    const categorieId = categorieSelect.value;
+    const fichier = fichierInput.files[0];
+
+    // Vérification des champs requis
+    if (!titre || !categorieId || !fichier) {
+      alert(
+        "Veuillez remplir tous les champs obligatoires (titre, catégorie, et image)."
+      );
+      return;
+    }
+
+    // Préparation des données pour l'API
+    const formData = new FormData();
+    formData.append("title", titre);
+    formData.append("category", categorieId);
+    formData.append("image", fichier);
+
+    try {
+      // Envoi à l'API
+      const response = await fetch("http://localhost:5678/api/works", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (response.ok) {
+        // Si tout s'est bien passé
+        alert("Projet ajouté avec succès !");
+        titreInput.value = ""; // Réinitialisation du champ titre
+        categorieSelect.value = ""; // Réinitialisation de la catégorie
+        fichierInput.value = ""; // Réinitialisation de l'input fichier
+
+        // Actualisation de la galerie
+        chargerGalerie(); // Une fonction qui recharge la galerie après ajout
+      } else {
+        // Si l'API renvoie une erreur
+        const errorMessage = await response.text();
+        alert(`Erreur lors de l'ajout du projet : ${errorMessage}`);
+      }
+    } catch (error) {
+      console.error("Erreur lors de l'envoi du projet :", error);
+      alert("Une erreur est survenue. Veuillez réessayer plus tard.");
+    }
+  });
+
+document.querySelector("#fichier").addEventListener("change", (event) => {
+  const fichier = event.target.files[0];
+  if (fichier) {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      const apercu = document.createElement("img");
+      apercu.src = e.target.result;
+      apercu.alt = "Aperçu de l'image";
+      apercu.style.maxWidth = "100%";
+      apercu.style.marginTop = "10px";
+
+      // Supprime l'ancien aperçu, s'il existe
+      const anciennePreview = document.querySelector(".preview-image");
+      if (anciennePreview) {
+        anciennePreview.remove();
+      }
+
+      // Ajoute le nouvel aperçu
+      apercu.classList.add("preview-image");
+      document.querySelector(".fond-bleu").appendChild(apercu);
+    };
+    reader.readAsDataURL(fichier);
+  }
+});
+
+async function envoyerFormulaire(titre, categorie, fichier) {
+  const formData = new FormData();
+  formData.append("title", titre);
+  formData.append("category", categorie);
+  formData.append("image", fichier);
+
+  try {
+    const response = await fetch("http://localhost:5678/api/projects", {
+      method: "POST",
+      body: formData,
+    });
+
+    if (response.ok) {
+      alert("Projet ajouté avec succès !");
+      document.querySelector("#titre").value = "";
+      document.querySelector(".categorie").value = "";
+      document.querySelector("#fichier").value = "";
+
+      // Supprime l'aperçu de l'image
+      const anciennePreview = document.querySelector(".preview-image");
+      if (anciennePreview) {
+        anciennePreview.remove();
+      }
+
+      // Recharge la galerie
+      chargerGalerie();
+    } else {
+      alert("Erreur lors de l'ajout du projet.");
+    }
+  } catch (error) {
+    console.error("Erreur :", error);
+    alert("Une erreur est survenue. Veuillez réessayer.");
+  }
+}
+
+// Fonction pour charger la galerie
+async function chargerGalerie() {
+  try {
+    const response = await fetch("http://localhost:5678/api/projects");
+    const projets = await response.json();
+
+    const galerie = document.querySelector(".galerie");
+    galerie.innerHTML = "";
+
+    projets.forEach((projet) => {
+      const projetElement = document.createElement("div");
+      projetElement.classList.add("projet");
+
+      const image = document.createElement("img");
+      image.src = projet.imageUrl;
+      image.alt = projet.title;
+
+      const titre = document.createElement("p");
+      titre.textContent = projet.title;
+
+      projetElement.appendChild(image);
+      projetElement.appendChild(titre);
+      galerie.appendChild(projetElement);
+    });
+  } catch (error) {
+    console.error("Erreur lors du chargement de la galerie :", error);
+  }
 }
 
 // Fonction pour générer dynamiquement le menu de catégories
