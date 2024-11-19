@@ -142,18 +142,19 @@ function genererMenuDeroulantCategories(categories) {
   });
 }
 
-// Écouteur pour l'ajout de photo via le p.rajout-photo
+// Écouteur pour l'ajout de photo
 
 document.querySelector(".valider").addEventListener("click", async () => {
   const titreInput = document.querySelector("#titre"); // Champ de titre dans la modale
   const categorieSelect = document.querySelector(".categorie"); // Menu déroulant des catégories
   const fichierInput = document.querySelector("#fichier"); // Champ d'upload de fichier
-  console.log(document.querySelector(".rajout-photo"));
+
   // Récupération des valeurs
   const titre = titreInput.value.trim();
   const categorieId = categorieSelect.value;
   const fichier = fichierInput.files[0];
 
+  //à revoir//////////////////////////////////////
   document.querySelector("#fichier").addEventListener("change", (event) => {
     const fichier = event.target.files[0];
     if (fichier) {
@@ -162,6 +163,7 @@ document.querySelector(".valider").addEventListener("click", async () => {
         const apercu = document.createElement("img");
         apercu.src = e.target.result;
         apercu.alt = "Aperçu de l'image";
+        /////////////////////////////////////////////////////
 
         // Supprime l'ancien aperçu, s'il existe
         const anciennePreview = document.querySelector(".preview-image");
@@ -169,9 +171,10 @@ document.querySelector(".valider").addEventListener("click", async () => {
           anciennePreview.remove();
         }
 
+        //////////////est-ce le bon querySelector//////////////
         // Ajoute le nouvel aperçu
         apercu.classList.add("preview-image");
-        document.querySelector(".fond-bleu").appendChild(apercu);
+        document.querySelector(".fond-bleu img").appendChild(apercu);
       };
       reader.readAsDataURL(fichier);
     }
