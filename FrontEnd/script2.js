@@ -142,7 +142,6 @@ function genererMenuDeroulantCategories(categories) {
   });
 }
 
-//chatgpt//
 // Écouteur pour l'ajout de photo via le p.rajout-photo
 document.querySelector(".valider").addEventListener("click", async () => {
   const titreInput = document.querySelector("#titre"); // Champ de titre dans la modale
@@ -154,18 +153,43 @@ document.querySelector(".valider").addEventListener("click", async () => {
   const categorieId = categorieSelect.value;
   const fichier = fichierInput.files[0];
 
+  document.querySelector("#fichier").addEventListener("change", (event) => {
+    const fichier = event.target.files[0];
+    if (fichier) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const apercu = document.createElement("img");
+        apercu.src = e.target.result;
+        apercu.alt = "Aperçu de l'image";
+
+        // Supprime l'ancien aperçu, s'il existe
+        const anciennePreview = document.querySelector(".preview-image");
+        if (anciennePreview) {
+          anciennePreview.remove();
+        }
+
+        // Ajoute le nouvel aperçu
+        apercu.classList.add("preview-image");
+        document.querySelector(".fond-bleu").appendChild(apercu);
+      };
+      reader.readAsDataURL(fichier);
+    }
+  });
+
   // Préparation des données pour l'API
   const formData = new FormData();
   formData.append("title", titre);
   formData.append("category", categorieId);
   formData.append("image", fichier);
 
+  const token = localStorage.getItem("connexionToken");
+
   try {
     // Envoi à l'API
     const response = await fetch("http://localhost:5678/api/works", {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${authToken}`, // Ajoute le token dans l'en-tête de la requête
+        Authorization: `Bearer ${token}`, // Ajoute le token dans l'en-tête de la requête
       },
       body: formData,
     });
@@ -177,11 +201,17 @@ document.querySelector(".valider").addEventListener("click", async () => {
       categorieSelect.value = ""; // Réinitialisation de la catégorie
       fichierInput.value = ""; // Réinitialisation de l'input fichier
 
+      // Supprime l'aperçu de l'image
+      const anciennePreview = document.querySelector(".preview-image");
+      if (anciennePreview) {
+        anciennePreview.remove();
+      }
+
       // Actualisation de la galerie
       chargerGalerie(); // Une fonction qui recharge la galerie après ajout
     } else {
       // Si l'API renvoie une erreur
-      const errorMessage = await response.text();
+
       alert(`Erreur lors de l'ajout du projet : ${errorMessage}`);
     }
   } catch (error) {
@@ -189,66 +219,6 @@ document.querySelector(".valider").addEventListener("click", async () => {
     alert("Une erreur est survenue. Veuillez réessayer plus tard.");
   }
 });
-
-document.querySelector("#fichier").addEventListener("change", (event) => {
-  const fichier = event.target.files[0];
-  if (fichier) {
-    const reader = new FileReader();
-    reader.onload = function (e) {
-      const apercu = document.createElement("img");
-      apercu.src = e.target.result;
-      apercu.alt = "Aperçu de l'image";
-
-      // Supprime l'ancien aperçu, s'il existe
-      const anciennePreview = document.querySelector(".preview-image");
-      if (anciennePreview) {
-        anciennePreview.remove();
-      }
-
-      // Ajoute le nouvel aperçu
-      apercu.classList.add("preview-image");
-      document.querySelector(".fond-bleu").appendChild(apercu);
-    };
-    reader.readAsDataURL(fichier);
-  }
-});
-
-async function envoyerFormulaire(titre, categorie, fichier) {
-  const formData = new FormData();
-  formData.append("title", titre);
-  formData.append("category", categorie);
-  formData.append("image", fichier);
-
-  const token = localStorage.getItem("connexionToken");
-  try {
-    const response = await fetch("http://localhost:5678/api/works", {
-      method: "POST",
-      headers: { Authorization: `Bearer ${token}` },
-      body: formData, //c'est quoi?
-    });
-
-    if (response.ok) {
-      alert("Projet ajouté avec succès !");
-      document.querySelector("#titre").value = "";
-      document.querySelector(".categorie").value = "";
-      document.querySelector("#fichier").value = "";
-
-      // Supprime l'aperçu de l'image
-      const anciennePreview = document.querySelector(".preview-image");
-      if (anciennePreview) {
-        anciennePreview.remove();
-      }
-
-      // Recharge la galerie
-      chargerGalerie();
-    } else {
-      alert("Erreur lors de l'ajout du projet.");
-    }
-  } catch (error) {
-    console.error("Erreur :", error);
-    alert("Une erreur est survenue. Veuillez réessayer.");
-  }
-}
 
 // Fonction pour charger la galerie
 async function chargerGalerie() {
