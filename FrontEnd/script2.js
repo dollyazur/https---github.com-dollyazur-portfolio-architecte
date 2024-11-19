@@ -143,6 +143,7 @@ function genererMenuDeroulantCategories(categories) {
 }
 
 // Écouteur pour l'ajout de photo via le p.rajout-photo
+
 document.querySelector(".valider").addEventListener("click", async () => {
   const titreInput = document.querySelector("#titre"); // Champ de titre dans la modale
   const categorieSelect = document.querySelector(".categorie"); // Menu déroulant des catégories
