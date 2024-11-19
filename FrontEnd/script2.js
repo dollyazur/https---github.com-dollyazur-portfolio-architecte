@@ -78,17 +78,17 @@ function supprimerProjet(id, figure) {
   // Supprimer l'élément du DOM
   figure.remove();
 
-  // Définir le jeton d'authentification (exemple)
-  const token = localStorage.getItem("connexionToken");
-
   // Requête API pour supprimer le projet dans la base de données
-  fetch(`http://localhost:5678/api/works/${id}`, {
+  fetch(`http://localhost:5678/api/works/${workId}`, {
     method: "DELETE",
-    headers: { Authorization: `Bearer ${token}` },
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+    },
   })
     .then((response) => {
       if (response.ok) {
-        console.log(`Projet ${id} supprimé avec succès`);
+        console.log(`Projet ${workId} supprimé avec succès`);
       } else {
         console.error("Erreur lors de la suppression du projet");
       }
@@ -144,7 +144,7 @@ function genererMenuDeroulantCategories(categories) {
 
 //chatgpt//
 // Écouteur pour l'ajout de photo via le p.rajout-photo
-document.querySelector(".rajout-photo").addEventListener("click", async () => {
+document.querySelector(".valider").addEventListener("click", async () => {
   const titreInput = document.querySelector("#titre"); // Champ de titre dans la modale
   const categorieSelect = document.querySelector(".categorie"); // Menu déroulant des catégories
   const fichierInput = document.querySelector("#fichier"); // Champ d'upload de fichier
@@ -153,14 +153,6 @@ document.querySelector(".rajout-photo").addEventListener("click", async () => {
   const titre = titreInput.value.trim();
   const categorieId = categorieSelect.value;
   const fichier = fichierInput.files[0];
-
-  // Vérification des champs requis
-  if (!titre || !categorieId || !fichier) {
-    alert(
-      "Veuillez remplir tous les champs obligatoires (titre, catégorie, et image)."
-    );
-    return;
-  }
 
   // Préparation des données pour l'API
   const formData = new FormData();
@@ -172,6 +164,9 @@ document.querySelector(".rajout-photo").addEventListener("click", async () => {
     // Envoi à l'API
     const response = await fetch("http://localhost:5678/api/works", {
       method: "POST",
+      headers: {
+        Authorization: `Bearer ${authToken}`, // Ajoute le token dans l'en-tête de la requête
+      },
       body: formData,
     });
 
