@@ -5,10 +5,15 @@ document.addEventListener("DOMContentLoaded", () => {
   loginForm.addEventListener("submit", async (event) => {
     // On empêche le comportement par défaut
     event.preventDefault();
-    console.log("Il n’y a pas eu de rechargement de page");
 
-    const emailValue = document.getElementById("mail").value.trim();
-    const motDePasseValue = document.getElementById("password").value.trim();
+    const emailValue = document.getElementById("mail").value;
+    const motDePasseValue = document.getElementById("password").value;
+
+    //On crée un objet avec les données de connexion
+    const loginData = {
+      email: email,
+      password: password,
+    };
 
     if (!emailValue || !motDePasseValue) {
       afficherMessageErreur("Veuillez remplir tous les champs.");
@@ -21,11 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
         headers: {
           "Content-Type": "application/json", //comment je veux avoir les données, ici en json
         },
-        body: JSON.stringify({
-          //les données que j'envoie c'est des chaines de char, on va les transformer en json pour qu l'API comprenne
-          email: emailValue,
-          password: motDePasseValue,
-        }),
+        body: JSON.stringify(loginData),
       });
 
       const data = await response.json();

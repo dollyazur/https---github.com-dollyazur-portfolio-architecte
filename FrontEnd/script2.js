@@ -54,10 +54,12 @@ function afficherProjetModale(projets) {
     poubelle.alt = "Supprimer";
     poubelle.classList.add("icon-poubelle"); // Ajouter une classe pour le style
 
+    /////////////pb suppr projet////////////////////////////////////////
     //rajouter un écouteur d'évènement sur les poubelles qui appellera la fonction supprimerProjet()
     poubelle.addEventListener("click", () =>
       supprimerProjet(projet.id, figure)
     );
+    ////////////////////////////////////////////////////////////////////
 
     // On ajoute l'image et le titre dans la figure
     figure.appendChild(img);
@@ -71,28 +73,35 @@ function afficherProjetModale(projets) {
 //créer une fonction de suppression qui sera activée à chaque fois qu'un utilisateur clique sur la poubelle
 function supprimerProjet(id, figure) {
   // Requête API pour supprimer le projet dans la base de données
-  fetch(`http://localhost:5678/api/works/${id}`, {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${localStorage.getItem("authToken")}`,
-    },
-  })
-    .then((response) => {
-      if (response.ok) {
-        console.log(`Projet ${id} supprimé avec succès`);
-      } else {
-        console.error(
-          "Erreur lors de la suppression du projet :",
-          response.statusText
-        );
-        alert("Impossible de supprimer le projet. Veuillez réessayer.");
-      }
-    })
-    .catch((error) => {
-      console.error("Erreur réseau :", error);
-      alert("Une erreur réseau est survenue. Veuillez réessayer.");
+
+  /////////////////////////////////pb suppr projet////////////////////
+  try {
+    const response = fetch(`http://localhost:5678/api/works/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+      },
     });
+    ////////////////////////////////////////////////////////////////////////
+
+    if (response.ok) {
+      // Supprimer l'élément du DOM
+      figure.remove();
+
+      // Mettre à jour la liste des projets sur la page d'accueil
+      const projets = fetchProjets();
+      ajouterProjets(projets);
+    } else {
+      console.error(
+        "Erreur lors de la suppression du projet:",
+        response.json()
+      );
+      alert("Impossible de supprimer le projet. Veuillez réessayer.");
+    }
+  } catch (error) {
+    console.error("Erreur réseau :", error);
+    alert("Une erreur réseau est survenue. Veuillez réessayer.");
+  }
 }
 
 //trier
