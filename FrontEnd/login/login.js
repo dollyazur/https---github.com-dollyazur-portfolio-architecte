@@ -11,8 +11,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     //On crée un objet avec les données de connexion
     const loginData = {
-      email: email,
-      password: password,
+      email: emailValue,
+      password: motDePasseValue,
     };
 
     if (!emailValue || !motDePasseValue) {

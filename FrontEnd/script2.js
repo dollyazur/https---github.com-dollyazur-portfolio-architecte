@@ -71,14 +71,15 @@ function afficherProjetModale(projets) {
 }
 
 //créer une fonction de suppression qui sera activée à chaque fois qu'un utilisateur clique sur la poubelle
-function supprimerProjet(id, figure) {
+async function supprimerProjet(id, figure) {
   // Requête API pour supprimer le projet dans la base de données
 
   /////////////////////////////////pb suppr projet////////////////////
   try {
-    const response = fetch(`http://localhost:5678/api/works/${id}`, {
+    const response = await fetch(`http://localhost:5678/api/works/${id}`, {
       method: "DELETE",
       headers: {
+        "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("authToken")}`,
       },
     });
@@ -89,12 +90,12 @@ function supprimerProjet(id, figure) {
       figure.remove();
 
       // Mettre à jour la liste des projets sur la page d'accueil
-      const projets = fetchProjets();
+      const projets = await recupProjet();
       ajouterProjets(projets);
     } else {
       console.error(
         "Erreur lors de la suppression du projet:",
-        response.json()
+        await response.json()
       );
       alert("Impossible de supprimer le projet. Veuillez réessayer.");
     }
