@@ -68,18 +68,10 @@ function afficherProjetModale(projets) {
   });
 }
 
-//rajouter l'icon de poubelle
-//il faut enregistrer la poubelle dans les assets
-//et l'afficher pour chaque image avec un position relative/absolute
-//et ajouter l'id du projet en id de l'icone
-
 //créer une fonction de suppression qui sera activée à chaque fois qu'un utilisateur clique sur la poubelle
 function supprimerProjet(id, figure) {
-  // Supprimer l'élément du DOM
-  figure.remove();
-
   // Requête API pour supprimer le projet dans la base de données
-  fetch(`http://localhost:5678/api/works/${workId}`, {
+  fetch(`http://localhost:5678/api/works/${id}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
@@ -88,13 +80,18 @@ function supprimerProjet(id, figure) {
   })
     .then((response) => {
       if (response.ok) {
-        console.log(`Projet ${workId} supprimé avec succès`);
+        console.log(`Projet ${id} supprimé avec succès`);
       } else {
-        console.error("Erreur lors de la suppression du projet");
+        console.error(
+          "Erreur lors de la suppression du projet :",
+          response.statusText
+        );
+        alert("Impossible de supprimer le projet. Veuillez réessayer.");
       }
     })
     .catch((error) => {
       console.error("Erreur réseau :", error);
+      alert("Une erreur réseau est survenue. Veuillez réessayer.");
     });
 }
 
@@ -142,7 +139,7 @@ function genererMenuDeroulantCategories(categories) {
   });
 }
 
-//à revoir//////////////////////////////////////
+/////////////////////////////////à expliquer///////////////////////////////////////////
 document.querySelector("#fichier").addEventListener("change", (event) => {
   const fichier = event.target.files[0];
   if (fichier) {
@@ -159,7 +156,6 @@ document.querySelector("#fichier").addEventListener("change", (event) => {
         anciennePreview.remove();
       }
 
-      //////////////est-ce le bon querySelector//////////////
       // Ajoute le nouvel aperçu
       apercu.classList.add("preview-image");
       document.querySelector(".fond-bleu").appendChild(apercu);
@@ -180,6 +176,7 @@ document.querySelector(".valider").addEventListener("click", async () => {
   const categorieId = categorieSelect.value;
   const fichier = fichierInput.files[0];
 
+  // message d'erreur si les chmaps ne sont pas remplis correctement
   if (!titre || !categorieId || !fichier) {
     alert("Veuillez remplir tous les champs et ajouter une image.");
     return;
