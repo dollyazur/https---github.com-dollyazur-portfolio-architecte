@@ -79,8 +79,7 @@ async function supprimerProjet(id, figure) {
     const response = await fetch(`http://localhost:5678/api/works/${id}`, {
       method: "DELETE",
       headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+        Authorization: `Bearer ${localStorage.getItem("connexionToken")}`,
       },
     });
     ////////////////////////////////////////////////////////////////////////
@@ -91,13 +90,8 @@ async function supprimerProjet(id, figure) {
 
       // Mettre à jour la liste des projets sur la page d'accueil
       const projets = await recupProjet();
-      ajouterProjets(projets);
-    } else {
-      console.error(
-        "Erreur lors de la suppression du projet:",
-        await response.json()
-      );
-      alert("Impossible de supprimer le projet. Veuillez réessayer.");
+      afficherProjet(projets);
+      afficherProjetModale(projets);
     }
   } catch (error) {
     console.error("Erreur réseau :", error);
