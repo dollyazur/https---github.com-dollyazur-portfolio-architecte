@@ -142,6 +142,32 @@ function genererMenuDeroulantCategories(categories) {
   });
 }
 
+//à revoir//////////////////////////////////////
+document.querySelector("#fichier").addEventListener("change", (event) => {
+  const fichier = event.target.files[0];
+  if (fichier) {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      const apercu = document.createElement("img");
+      apercu.src = e.target.result;
+      apercu.alt = "Aperçu de l'image";
+      /////////////////////////////////////////////////////
+
+      // Supprime l'ancien aperçu, s'il existe
+      const anciennePreview = document.querySelector(".preview-image");
+      if (anciennePreview) {
+        anciennePreview.remove();
+      }
+
+      //////////////est-ce le bon querySelector//////////////
+      // Ajoute le nouvel aperçu
+      apercu.classList.add("preview-image");
+      document.querySelector(".fond-bleu").appendChild(apercu);
+    };
+    reader.readAsDataURL(fichier);
+  }
+});
+
 // Écouteur pour l'ajout de photo
 
 document.querySelector(".valider").addEventListener("click", async () => {
@@ -154,31 +180,10 @@ document.querySelector(".valider").addEventListener("click", async () => {
   const categorieId = categorieSelect.value;
   const fichier = fichierInput.files[0];
 
-  //à revoir//////////////////////////////////////
-  document.querySelector("#fichier").addEventListener("change", (event) => {
-    const fichier = event.target.files[0];
-    if (fichier) {
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        const apercu = document.createElement("img");
-        apercu.src = e.target.result;
-        apercu.alt = "Aperçu de l'image";
-        /////////////////////////////////////////////////////
-
-        // Supprime l'ancien aperçu, s'il existe
-        const anciennePreview = document.querySelector(".preview-image");
-        if (anciennePreview) {
-          anciennePreview.remove();
-        }
-
-        //////////////est-ce le bon querySelector//////////////
-        // Ajoute le nouvel aperçu
-        apercu.classList.add("preview-image");
-        document.querySelector(".fond-bleu img").appendChild(apercu);
-      };
-      reader.readAsDataURL(fichier);
-    }
-  });
+  if (!titre || !categorieId || !fichier) {
+    alert("Veuillez remplir tous les champs et ajouter une image.");
+    return;
+  }
 
   // Préparation des données pour l'API
   const formData = new FormData();
