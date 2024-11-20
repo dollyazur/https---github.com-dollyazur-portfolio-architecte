@@ -76,6 +76,7 @@ async function supprimerProjet(id, figure) {
 
   /////////////////////////////////pb suppr projet////////////////////
   try {
+    confirm("Êtes-vous sûr de vouloir supprimer ce projet ?");
     const response = await fetch(`http://localhost:5678/api/works/${id}`, {
       method: "DELETE",
       headers: {
@@ -196,6 +197,7 @@ document.querySelector(".valider").addEventListener("click", async () => {
 
   try {
     // Envoi à l'API
+
     const response = await fetch("http://localhost:5678/api/works", {
       method: "POST",
       headers: {
