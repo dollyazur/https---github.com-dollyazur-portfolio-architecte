@@ -139,10 +139,12 @@ function genererMenuDeroulantCategories(categories) {
 }
 
 document.querySelector("#fichier").addEventListener("change", (event) => {
-  const fichier = event.target.files[0];
+  const fichier = event.target.files[0]; //recupération du fichier dans l'ordinateur
   if (fichier) {
-    const reader = new FileReader();
+    //vérification qu'il y ait bien un fichier
+    const reader = new FileReader(); //creation d'un lecteur qui va lire les données du fichiers qu'on va recup
     reader.onload = function (e) {
+      //des que le lecteur lit les infos du fichiers, création de tout ce qu'il y a en dessous
       const apercu = document.createElement("img");
       apercu.src = e.target.result;
       apercu.alt = "Aperçu de l'image";
@@ -153,11 +155,11 @@ document.querySelector("#fichier").addEventListener("change", (event) => {
         anciennePreview.remove();
       }
 
-      // Ajoute le nouvel aperçu
+      // Affiche le nouvel aperçu
       apercu.classList.add("preview-image");
       document.querySelector(".fond-bleu").appendChild(apercu);
     };
-    reader.readAsDataURL(fichier);
+    reader.readAsDataURL(fichier); //le lecteur recup l'url du fichiers, ca va stocker l'image dans l'api
   }
 });
 
@@ -180,8 +182,8 @@ document.querySelector(".valider").addEventListener("click", async () => {
   }
 
   // Préparation des données pour l'API
-  const formData = new FormData();
-  formData.append("title", titre);
+  const formData = new FormData(); // formadata c'est les données du formulaire qui sont préformatées en json pour que l'api comprenne
+  formData.append("title", titre); //je recupère les 3 données du formulaire //objets dans le colis
   formData.append("category", categorieId);
   formData.append("image", fichier);
 
