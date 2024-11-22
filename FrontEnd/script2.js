@@ -7,7 +7,6 @@ async function recupProjet() {
 }
 console.log(recupProjet()); //on affiche notre fonction, et on appelle la fonction dans la fonction donc ()
 
-// fonction médor, pas taper 11 fois le même code!!!
 //on a RECUP les projets, Faut les afficher now!!
 function afficherProjet(projets) {
   const gallery = document.querySelector(".gallery"); //on recup la gallery dans le DOM
@@ -54,12 +53,10 @@ function afficherProjetModale(projets) {
     poubelle.alt = "Supprimer";
     poubelle.classList.add("icon-poubelle"); // Ajouter une classe pour le style
 
-    /////////////pb suppr projet////////////////////////////////////////
     //rajouter un écouteur d'évènement sur les poubelles qui appellera la fonction supprimerProjet()
     poubelle.addEventListener("click", () =>
       supprimerProjet(projet.id, figure)
     );
-    ////////////////////////////////////////////////////////////////////
 
     // On ajoute l'image et le titre dans la figure
     figure.appendChild(img);
@@ -74,7 +71,6 @@ function afficherProjetModale(projets) {
 async function supprimerProjet(id, figure) {
   // Requête API pour supprimer le projet dans la base de données
 
-  /////////////////////////////////pb suppr projet////////////////////
   try {
     confirm("Êtes-vous sûr de vouloir supprimer ce projet ?");
     const response = await fetch(`http://localhost:5678/api/works/${id}`, {
@@ -83,7 +79,6 @@ async function supprimerProjet(id, figure) {
         Authorization: `Bearer ${localStorage.getItem("connexionToken")}`,
       },
     });
-    ////////////////////////////////////////////////////////////////////////
 
     if (response.ok) {
       // Supprimer l'élément du DOM
@@ -105,7 +100,6 @@ async function supprimerProjet(id, figure) {
 // Fonction pour récupérer les catégories de l'API (si disponible) ou depuis des données locales
 async function recupCategories() {
   try {
-    //a voir si je le garde
     const response = await fetch("http://localhost:5678/api/categories"); // Requête API pour les catégories
     const categories = await response.json(); // On convertit la réponse en JSON
     console.log(categories); //fournit dans le JSON de base
@@ -118,7 +112,7 @@ async function recupCategories() {
 
 function genererMenuDeroulantCategories(categories) {
   //on va afficher les balises options qui correspondent aux differentes catégories dans le formulaire
-  // on va recup le select qu'on a créé dans l'index (ligne 241)
+  // on va recup le select qu'on a créé dans l'index
   //c'est le select qui fait que soit un menu déroulant, ne pas use un input, les infos sont dans le htlm
   //le select est le parent, il a des children, ce sont les options
   const select = document.querySelector(".categorie");
@@ -144,7 +138,6 @@ function genererMenuDeroulantCategories(categories) {
   });
 }
 
-/////////////////////////////////à expliquer///////////////////////////////////////////
 document.querySelector("#fichier").addEventListener("change", (event) => {
   const fichier = event.target.files[0];
   if (fichier) {
@@ -153,7 +146,6 @@ document.querySelector("#fichier").addEventListener("change", (event) => {
       const apercu = document.createElement("img");
       apercu.src = e.target.result;
       apercu.alt = "Aperçu de l'image";
-      /////////////////////////////////////////////////////
 
       // Supprime l'ancien aperçu, s'il existe
       const anciennePreview = document.querySelector(".preview-image");
@@ -286,6 +278,7 @@ function genererMenuCategories(categories, projets) {
   });
 }
 
+//connexion / déconnexion
 function modeEditeur() {
   if (localStorage.getItem("connexionToken") !== null) {
     console.log("L'utilisateur est connecté.");
@@ -349,7 +342,7 @@ const overlay = document.getElementById("overlay");
 const modal1 = document.getElementById("modal1");
 const modal2 = document.getElementById("modale2");
 
-//on récupère le lien modifier qui va déclancher l'affichage de la modale 1
+//on récupère le lien modifier qui va déclencher l'affichage de la modale 1
 const modifier = document.querySelector(".modifier");
 
 modifier.addEventListener("click", () => {
@@ -418,8 +411,8 @@ async function init() {
   afficherProjet(projets); // On affiche tous les projets par défaut
   afficherProjetModale(projets); // On affiche tous les projets par défaut dans la modale 1
   genererMenuCategories(categories, projets); // On génère le menu de catégories
-  //rappel fonction médor, on lui a appris à s'aaseoir mais on lui a pas dit! donc forcement il ne fait pas
-  //generer nom de la function + use cont categories (ligne 287) puisque que c'est elle qui gère la recup des categ
+  //rappel fonction médor, on lui a appris à s'asseoir mais on lui a pas dit! donc forcement il ne fait pas
+  //generer nom de la function + use const categories puisque que c'est elle qui gère la recup des categ
   genererMenuDeroulantCategories(categories);
 }
 
