@@ -1,6 +1,4 @@
 let modal = null; //permet de savoir quelle est la boite modale actuellement open
-const focusableSelector = "button, a, input, textarea"; //toutes les choses que va "viser" le Tab
-let focusables = []; //le tableau ou l'on stocke les focusables
 
 const openModal = async function (e) {
   e.preventDefault();
@@ -15,7 +13,6 @@ const openModal = async function (e) {
     console.error("modal not found");
     return;
   }
-  focusables = Array.from(modal.querySelectorAll(focusableSelector)); //on récupère tout les élément du focusableSelector, mais on veux work with tableau donc un array.from sinon ca renvoie du node
 
   modal.style.display = null;
   modal.removeAttribute("aria-hidden"); //on supprime l'élement puisqu'il redevient visible
@@ -48,29 +45,6 @@ const stopPropagation = function (e) {
   e.stopPropagation();
 }; //empeche la propagation de l'évènement vers les parents et donc de limiter le click à l'endroit precis, pas en cliquant n'importe où
 
-const focusInModal = function (e) {
-  e.preventDefault();
-  //pour passer d'un element à l'autre avec le tab, on cherche l'index dans le tableau
-  let index = focusables.findIndex((f) => f === modal.querySelector(":focus"));
-  console.log(index); // ca marche
-  // enleve un cran avec le tab shift
-  if (e.shifKey === true) {
-    index--;
-  } else {
-    index++;
-  }
-
-  //on rajoute ou on enlève un cran et on utilise la taille totale pour revnir à zero une fois au bout comme le carousel
-
-  if (index >= focusables.length) {
-    index = 0;
-  }
-  if (index < 0) {
-    index = focusables.length - 1;
-  }
-  focusables[index].focus();
-};
-
 const loadModal = async function (url) {
   const target = "#" + url.split("#")[1]; //pas compris //extraction de l'id de la modale
   const existingModal = document.querySelector(target); // vérifie si la modale existe déjà dans le DOM
@@ -89,18 +63,3 @@ const loadModal = async function (url) {
 document.querySelectorAll(".js-modal").forEach((a) => {
   a.addEventListener("click", openModal);
 });
-
-window.addEventListener("keydown", function (e) {
-  //ecouter la pression sur une touche du clavier pour ceux qui naviguent au clavier
-  if (e.key === "Escape" || e.key === "Esc") {
-    //l'un ou || l'autre selon les navigateurs
-    closeModal(e);
-  }
-  if (e.key === "Tab" && modal !== null) {
-    //on enferme le focus de l'utilisateur dans la boite modale
-    focusInModal(e);
-  }
-});
-
-//notion d'accessibilité importante, accès au clavier, lecteur d'écran
-//ajouter une croix pour fermer, fonction ajouter de la modale
