@@ -199,9 +199,9 @@ document.querySelector(".valider").addEventListener("click", async () => {
     const response = await fetch("http://localhost:5678/api/works", {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${token}`, // Ajoute le token dans l'en-tête de la requête
+        Authorization: `Bearer ${token}`, // Ajoute le token pour l'authentification
       },
-      body: formData,
+      body: formData, //envoi du formulaire
     });
 
     if (response.ok) {
