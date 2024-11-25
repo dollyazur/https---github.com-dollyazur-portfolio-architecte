@@ -33,6 +33,8 @@ function afficherProjet(projets) {
   });
 }
 
+/////Modales//////////
+
 function afficherProjetModale(projets) {
   const gallery = document.querySelector(".gallery-modale"); //on recup la gallery dans le DOM
   gallery.innerHTML = ""; //effacement total des element sus mentionnés
@@ -137,6 +139,8 @@ function genererMenuDeroulantCategories(categories) {
     select.appendChild(option);
   });
 }
+
+// ajout photo //////////////
 
 document.querySelector("#fichier").addEventListener("change", (event) => {
   const fichier = event.target.files[0]; //recupération du fichier dans l'ordinateur
@@ -263,7 +267,22 @@ function genererMenuCategories(categories, projets) {
   // Créer un bouton "Tous" pour afficher tous les projets
   const boutonTous = document.createElement("button");
   boutonTous.textContent = "Tous"; // Texte du bouton
-  boutonTous.addEventListener("click", () => afficherProjet(projets)); // Filtre par "Tous" (affiche tous les projets)
+  boutonTous.classList.add("active"); // Classe par défaut pour le style initial
+
+  boutonTous.addEventListener("click", () =>
+    // Filtre par "Tous" (affiche tous les projets)
+
+    {
+      // Retirer la classe "active" de tous les boutons
+      document.querySelectorAll("button").forEach((btn) => {
+        btn.classList.remove("active");
+      });
+      // Ajouter la classe "active" au bouton cliqué
+      boutonTous.classList.add("active");
+      afficherProjet(projets); // Filtre par "Tous" (affiche tous les projets)
+    }
+  );
+
   menu.appendChild(boutonTous); // On ajoute le bouton au menu
 
   // Pour chaque catégorie, créer un bouton
@@ -271,6 +290,13 @@ function genererMenuCategories(categories, projets) {
     const bouton = document.createElement("button");
     bouton.textContent = categorie.name; // Nom de la catégorie
     bouton.addEventListener("click", () => {
+      // Retirer la classe "active" de tous les boutons
+      document.querySelectorAll("button").forEach((btn) => {
+        btn.classList.remove("active");
+      });
+      // Ajouter la classe "active" au bouton cliqué
+      bouton.classList.add("active");
+
       const projetsFiltres = projets.filter(
         (projet) => projet.categoryId === categorie.id // on filtre par l'id de la categorie comme affiché dans le console.log
       ); // Filtrer les projets par catégorie
@@ -413,7 +439,7 @@ async function init() {
   afficherProjet(projets); // On affiche tous les projets par défaut
   afficherProjetModale(projets); // On affiche tous les projets par défaut dans la modale 1
   genererMenuCategories(categories, projets); // On génère le menu de catégories
-  //rappel fonction médor, on lui a appris à s'asseoir mais on lui a pas dit! donc forcement il ne fait pas
+
   //generer nom de la function + use const categories puisque que c'est elle qui gère la recup des categ
   genererMenuDeroulantCategories(categories);
 }

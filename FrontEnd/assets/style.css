@@ -191,11 +191,18 @@ button {
   margin-right: 10px;
   color: #1d6154;
   font-family: Syne;
+  background-color: white; /* Fond blanc par défaut */
 }
 
 button:hover {
   background-color: #1d6154;
   color: white;
+}
+
+/* Style par défaut pour le bouton "Tous" (active) */
+button.active {
+  background-color: #1d6154; /* Fond vert */
+  color: white; /* Texte blanc */
 }
 
 .modifier {

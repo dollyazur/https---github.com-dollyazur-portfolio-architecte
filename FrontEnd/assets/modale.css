@@ -7,11 +7,6 @@ html {
   box-sizing: border-box;
 }
 
-/* on voit bien les éléments qui sont focus
-*:focus {
-  box-shadow: 0 0 10px blue;
-}*/
-
 .modal1 {
   position: fixed;
   display: flex;

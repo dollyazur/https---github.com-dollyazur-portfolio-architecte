@@ -1,7 +1,7 @@
 let modal = null; // Stocke la modale actuellement ouverte
 
 const openModal = async function (e) {
-  e.preventDefault(); // Empêche le comportement par défaut du lien ou du bouton cliqué
+  e.preventDefault(); // Empêche le comportement par défaut
 
   const target = e.target.getAttribute("href"); // Récupère la cible spécifiée dans l'attribut href
   if (target.startsWith("#")) {
