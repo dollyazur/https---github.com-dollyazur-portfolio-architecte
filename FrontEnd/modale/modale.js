@@ -1,65 +1,67 @@
-let modal = null; //permet de savoir quelle est la boite modale actuellement open
+let modal = null; // Stocke la modale actuellement ouverte
 
 const openModal = async function (e) {
-  e.preventDefault();
+  e.preventDefault(); // Empêche le comportement par défaut du lien ou du bouton cliqué
 
-  const target = e.target.getAttribute("href");
+  const target = e.target.getAttribute("href"); // Récupère la cible spécifiée dans l'attribut href
   if (target.startsWith("#")) {
-    modal = document.querySelector(target);
+    // Si la cible est un ID
+    modal = document.querySelector(target); // Trouve l'élément correspondant dans la page
   } else {
-    modal = await loadModal(target); //je lui passe l'url
+    // Sinon, charge la modale depuis une URL
+    modal = await loadModal(target);
   }
   if (!modal) {
+    // Si aucune modale n'est trouvée, afficher un message d'erreur et arrêter
     console.error("modal not found");
     return;
   }
 
-  modal.style.display = null;
-  modal.removeAttribute("aria-hidden"); //on supprime l'élement puisqu'il redevient visible
-  modal.setAttribute("aria-modal", "true");
-  modal.addEventListener("click", closeModal);
-  modal.querySelector(".js-modal-close").addEventListener("click", closeModal); //on cherche le bouton et on ecoute le click
+  modal.style.display = null; // Affiche la modale en retirant un éventuel style `display: none`
+  modal.removeAttribute("aria-hidden"); // modale n'est plus cachée pour l'accessibilité
+  modal.setAttribute("aria-modal", "true"); //  fenêtre modale active
+  modal.addEventListener("click", closeModal); // Ferme la modale si on clique en dehors du contenu
+  modal.querySelector(".js-modal-close").addEventListener("click", closeModal); // fermer la modale au click bouton
   modal
     .querySelector(".js-modal-stop")
-    .addEventListener("click", stopPropagation);
+    .addEventListener("click", stopPropagation); // Empêche la fermeture en cliquant ailleurs que défini
 };
 
 const closeModal = function (e) {
-  //inverse de open
-  if (modal === null) return; //si on essaye de close une modale inexistante, pas besoin d'aller plus loin
+  if (modal === null) return; // Si aucune modale n'est ouverte, ne rien faire
   e.preventDefault();
-  modal.style.display = "none"; // on remasque la boîte modale
-  modal.setAttribute("aria-hidden", "true"); //élément doit être masqué
-  modal.removeAttribute("aria-modal"); //on remove le tout, aria modal et le click
-  modal.removeEventListener("click", closeModal);
+  modal.style.display = "none"; // Cache la modale en ajoutant un style `display: none`
+  modal.setAttribute("aria-hidden", "true"); // Indique que la modale est cachée pour l'accessibilité
+  modal.removeAttribute("aria-modal"); // Retire l'indication de fenêtre modale active
+  modal.removeEventListener("click", closeModal); // Supprime l'écouteur de clic en dehors du contenu
   modal
     .querySelector(".js-modal-close")
-    .removeEventListener("click", closeModal);
+    .removeEventListener("click", closeModal); // Supprime l'écouteur de clic sur le bouton de fermeture
   modal
     .querySelector(".js-modal-stop")
-    .removeEventListener("click", stopPropagation); // on remove pour tout bien nettoyer
-  modal = null;
+    .removeEventListener("click", stopPropagation); // Supprime l'écouteur pour empêcher la propagation des clics
+  modal = null; // Réinitialise la variable `modal` à null
 };
 
 const stopPropagation = function (e) {
-  e.stopPropagation();
-}; //empeche la propagation de l'évènement vers les parents et donc de limiter le click à l'endroit precis, pas en cliquant n'importe où
+  e.stopPropagation(); // Empêche le clic de se propager à d'autres éléments
+};
 
 const loadModal = async function (url) {
-  const target = "#" + url.split("#")[1]; //pas compris //extraction de l'id de la modale
-  const existingModal = document.querySelector(target); // vérifie si la modale existe déjà dans le DOM
-  if (existingModal !== null) return existingModal; // une seule modale dans le code source quelque soit le nbre de fois qu'on ouvre la modale, optimise les performance, evite la répétition
-  const html = await fetch(url).then((response) => response.text());
-  const element = document //pas compris
+  const target = "#" + url.split("#")[1]; // Extrait l'ID de la modale depuis l'URL
+  const existingModal = document.querySelector(target); // Vérifie si la modale existe déjà dans la page
+  if (existingModal !== null) return existingModal; // Si elle existe, la retourner sans la recharger
+  const html = await fetch(url).then((response) => response.text()); // Charge le contenu HTML de la modale depuis l'URL
+  const element = document // Convertit le HTML dans le DOM
     .createRange()
     .createContextualFragment(html)
-    .querySelector(target); //pas compris //recupère la modale dans le html chargé
+    .querySelector(target); // Récupère la modale
   if (element === null)
-    throw `L'élément ${target} n'a pas été trouvé dans la page ${url}`; //en cas d'erreur
-  document.body.append(element); //pas compris // ajout de la modale au DOM
-  return element;
+    throw `L'élément ${target} n'a pas été trouvé dans la page ${url}`; // erreur
+  document.body.append(element); // Ajoute la modale au DOM
+  return element; // retourne elemnet
 };
 
 document.querySelectorAll(".js-modal").forEach((a) => {
-  a.addEventListener("click", openModal);
+  a.addEventListener("click", openModal); // ouvrir la modale au clic
 });
