@@ -44,7 +44,7 @@ const closeModal = function (e) {
 };
 
 const stopPropagation = function (e) {
-  e.stopPropagation(); // Empêche le clic de se propager à d'autres éléments
+  e.stopPropagation(); // fonction de base qui empêche le clic de se propager à d'autres éléments
 };
 
 const loadModal = async function (url) {

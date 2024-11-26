@@ -3,7 +3,7 @@ async function recupProjet() {
   //toujours async d'abord si on utilise await
   const response = await fetch("http://localhost:5678/api/works"); //penser à mettre les guillemets autour de l'url
   const projets = await response.json(); //retourne la réponse en JSON t'es bien brave!
-  return projets; //demande de réponse! logique! on retourne le "projet" vu qu'on vient d'appeler la const "projet"
+  return projets; //demande de réponse! logique! on retourne "projets" vu qu'on vient d'appeler la const "projets"
 }
 console.log(recupProjet()); //on affiche notre fonction, et on appelle la fonction dans la fonction donc ()
 
@@ -99,7 +99,7 @@ async function supprimerProjet(id, figure) {
 
 //trier
 
-// Fonction pour récupérer les catégories de l'API (si disponible) ou depuis des données locales
+// Fonction pour récupérer les catégories de l'API
 async function recupCategories() {
   try {
     const response = await fetch("http://localhost:5678/api/categories"); // Requête API pour les catégories
